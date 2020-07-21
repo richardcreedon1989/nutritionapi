@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
@@ -7,6 +7,7 @@ import { Card, CardBody, Row, Col } from "reactstrap";
 
 const App = (props) => {
   const [displayedInfo, setDisplayedInfo] = useState([]); //combining the term searched and the API return data for display
+  const [setErrorResponse] = useState(false);
 
   const onSearchSubmit = async (props) => {
     let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
@@ -26,18 +27,9 @@ const App = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setErrorResponse(true); //throwing a not function error when get 555 response
       });
   };
-
-  const isInitialMount = useRef(true);
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      console.log("displayedInfoUseEffect", displayedInfo);
-    }
-  }, [displayedInfo]);
-
   return (
     <div className="Card">
       <div>
@@ -60,3 +52,12 @@ const App = (props) => {
 };
 
 export default App;
+
+// const isInitialMount = useRef(true);
+// useEffect(() => {
+//   if (isInitialMount.current) {
+//     isInitialMount.current = false;
+//   } else {
+//     console.log("displayedInfoUseEffect", displayedInfo);
+//   }
+// }, [displayedInfo]);

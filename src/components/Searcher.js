@@ -2,22 +2,31 @@ import React, { useState } from "react";
 import { Input, Form } from "reactstrap";
 
 const Searcher = (props) => {
-  const [searchTerm, setsearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const clickHandler = () => {
+    console.log("clicked");
+  };
   const onSearchSubmit = (e) => {
     e.preventDefault();
     props.onSearchSubmit(searchTerm);
+    setSearchTerm("");
   };
 
   const searchChangeHandler = (e) => {
     e.preventDefault();
-    setsearchTerm(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
   return (
     <div>
       <Form onSubmit={onSearchSubmit}>
-        <Input type="text" onChange={searchChangeHandler} />
+        <Input
+          type="text"
+          value={searchTerm}
+          onChange={searchChangeHandler}
+          onClick={clickHandler}
+        />
       </Form>
     </div>
   );
