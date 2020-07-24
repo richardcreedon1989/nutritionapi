@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
+import Basket from "./components/Basket";
 
 import { Card, CardBody, Row, Col } from "reactstrap";
 
 const App = (props) => {
   const [displayedInfo, setDisplayedInfo] = useState([]); //combining the term searched and the API return data for display
   const [setErrorResponse] = useState(false);
+  const [calorieTotal, setCalorieTotal] = useState(0);
+
+  const calorieCalculator = (props) => {
+    setCalorieTotal(calorieTotal + props);
+    console.log(calorieTotal);
+  };
 
   const onSearchSubmit = async (props) => {
     let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
@@ -33,14 +40,27 @@ const App = (props) => {
   return (
     <div className="Card">
       <div>
-        <Searcher onSearchSubmit={onSearchSubmit} />
+        <Searcher
+          onSearchSubmit={onSearchSubmit}
+          style={{
+            width: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
         <Row>
           <Col sm="6">
-            <Card>
+            <Card style={{ width: "70%" }}>
+              <Basket />
               <CardBody>
                 {displayedInfo.map((displayedInfo) => {
-                  console.log("displayedInfo", displayedInfo);
-                  return <IndividualFood displayedInfo={displayedInfo} />;
+                  return (
+                    <IndividualFood
+                      calorieCalculator={calorieCalculator}
+                      displayedInfo={displayedInfo}
+                    />
+                  );
                 })}
               </CardBody>
             </Card>

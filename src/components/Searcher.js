@@ -4,9 +4,6 @@ import { Input, Form } from "reactstrap";
 const Searcher = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const clickHandler = () => {
-    console.log("clicked");
-  };
   const onSearchSubmit = (e) => {
     e.preventDefault();
     props.onSearchSubmit(searchTerm);
@@ -21,12 +18,7 @@ const Searcher = (props) => {
   return (
     <div>
       <Form onSubmit={onSearchSubmit}>
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={searchChangeHandler}
-          onClick={clickHandler}
-        />
+        <Input type="text" value={searchTerm} onChange={searchChangeHandler} />
       </Form>
     </div>
   );
