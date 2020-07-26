@@ -4,7 +4,15 @@ import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
 import Basket from "./components/Basket";
 
-import { Card, CardBody, Row, Col } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Row,
+  Col,
+  CardTitle,
+  Button,
+  CardText,
+} from "reactstrap";
 
 const App = (props) => {
   const [displayedInfo, setDisplayedInfo] = useState([]); //combining the term searched and the API return data for display
@@ -31,10 +39,11 @@ const App = (props) => {
             value: response.data.calories,
           },
         ]);
+        console.log("displayed", displayedInfo);
       })
       .catch((err) => {
         console.log(err);
-        setErrorResponse(true); //throwing a not function error when get 555 response
+        // setErrorResponse(true); //throwing a not function error when get 555 response
       });
   };
   return (
@@ -50,10 +59,39 @@ const App = (props) => {
           }}
         />
         <Row>
-          <Col sm="6">
-            <Card style={{ width: "70%" }}>
-              <Basket />
-              <CardBody>
+          {displayedInfo.length > 0 &&
+            displayedInfo.map((displayedInfo) => {
+              return (
+                <div
+                  // style={{
+                  //   display: "grid",
+                  //   width: "30%",
+                  //   margin: "auto",
+                  // }}
+                  style={{
+                    display: "grid",
+                    // gridTemplateColumns: "auto auto auto",
+                    margin: "1.2em",
+                    width: "33%",
+                  }}
+                >
+                  <Col>
+                    <IndividualFood
+                      style={{ gridColumnStart: "1", gridColumnEnd: "3" }}
+                      calorieCalculator={calorieCalculator}
+                      displayedInfo={displayedInfo}
+                    />
+                  </Col>
+                </div>
+              );
+            })}
+        </Row>
+
+        {/* {displayedInfo.length > 0 && (
+          <Row>
+            <Col sm="6">
+              <Card body>
+                {" "}
                 {displayedInfo.map((displayedInfo) => {
                   return (
                     <IndividualFood
@@ -62,10 +100,10 @@ const App = (props) => {
                     />
                   );
                 })}
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+              </Card>
+            </Col>
+          </Row>
+        )} */}
       </div>
     </div>
   );
