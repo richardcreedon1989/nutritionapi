@@ -5,8 +5,8 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 const IndividualFood = (props) => {
   const { displayedInfo } = props;
   const calorieCalculator = (e) => {
-    props.calorieCalculator(displayedInfo.value);
-    console.log("value", displayedInfo.value);
+    props.calorieCalculator(displayedInfo);
+    console.log("value", displayedInfo);
   };
 
   return (
@@ -14,11 +14,10 @@ const IndividualFood = (props) => {
       <div>
         <ListGroup>
           <ListGroupItem>
-            {`${displayedInfo.name} - ${displayedInfo.value}kCal`}
-            <BsFillPlusCircleFill
-              onClick={calorieCalculator}
-              style={{ float: "right" }}
-            >
+            {`${displayedInfo.name}
+            Fat Content: ${displayedInfo.fat}g
+            ${displayedInfo.calories}kCal`}
+            <BsFillPlusCircleFill onClick={calorieCalculator}>
               {" "}
               Click{" "}
             </BsFillPlusCircleFill>{" "}

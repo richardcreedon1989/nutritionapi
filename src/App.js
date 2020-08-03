@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+
 import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
 import Basket from "./components/Basket";
+import CalorieDisplay from "./components/CalorieDisplay";
+import Table from "./components/FoodTable";
+import Sliders from "./components/Slider";
+import NutrientRatio from "./components/NutrientRatio";
+import MultiSliderNutrient from "./components/MultiSliderNutrient";
 
 import {
   Card,
+  Label,
   CardBody,
+  Input,
+  Form,
   Row,
   Col,
   CardTitle,
@@ -18,11 +27,31 @@ const App = (props) => {
   const [displayedInfo, setDisplayedInfo] = useState([]); //combining the term searched and the API return data for display
   const [setErrorResponse] = useState(false);
   const [calorieTotal, setCalorieTotal] = useState(0);
+  const [calorieSelected, setCalorieSelected] = useState(1800);
+  const [protein, setProtein] = useState(40);
+  const [carbs, setCarbs] = useState(40);
+  const [fat, setFat] = useState(20);
+
+  const [fatTotal, setFatTotal] = useState(0);
+  const [carbsTotal, setCarbsTotal] = useState(0);
+  const [proteinTotal, setProteinTotal] = useState(0);
+
+  const [nutrientPercentage, setNutrientPercentage] = useState({
+    protein: 40,
+    carbs: 40,
+    fat: 20,
+  });
 
   const calorieCalculator = (props) => {
-    setCalorieTotal(calorieTotal + props);
-    console.log(calorieTotal);
+    setCalorieTotal(calorieTotal - props.value);
+    console.log("cals total", calorieTotal);
   };
+
+  const setCalorieHandler = (e) => {
+    setCalorieSelected(e.target.value);
+  };
+
+  const ratioHandler = () => {};
 
   const onSearchSubmit = async (props) => {
     let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
@@ -32,23 +61,68 @@ const App = (props) => {
         data
       )
       .then((response) => {
+        console.log("response", response);
+        console.log("respone extra", response.data.calories);
         setDisplayedInfo([
           ...displayedInfo,
           {
             name: props,
-            value: response.data.calories,
+            calories: response.data.calories,
+            fat: response.data.totalNutrients.FAT.quantity.toFixed(),
+            carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
+            protein: response.data.totalNutrients.PROCNT.quantity.toFixed(),
           },
         ]);
+        setCalorieTotal(calorieTotal + parseInt(response.data.calories));
+        setFatTotal(
+          fatTotal +
+            parseInt(response.data.totalNutrients.FAT.quantity.toFixed())
+        );
+        setCarbsTotal(
+          carbsTotal +
+            parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed())
+        );
+        setProteinTotal(
+          proteinTotal +
+            parseInt(response.data.totalNutrients.PROCNT.quantity.toFixed())
+        );
         console.log("displayed", displayedInfo);
       })
       .catch((err) => {
         console.log(err);
-        // setErrorResponse(true); //throwing a not function error when get 555 response
       });
   };
   return (
     <div className="Card">
       <div>
+        <div style={{ width: "50%" }}>
+          {`Protein: ${protein}, Carbs: ${carbs}, Fat: ${fat}`}
+          {/* <Sliders orientation="vertical" nutrientPercentage={protein} />
+          <Sliders orientation="vertical" carbs={carbs} />
+          <Sliders orientation="vertical" fat={fat} /> */}
+          {/* <NutrientRatio />
+          <MultiSliderNutrient /> */}
+        </div>
+        <div style={{ width: "50%" }}>
+          <Form>
+            <Label for="volume">
+              {`Select Daily Calorie Intake: ${calorieSelected}`}
+            </Label>
+
+            <Input
+              type="range"
+              id="volume"
+              name="volume"
+              min="800"
+              max="6000"
+              step="10"
+              value={calorieSelected}
+              onChange={setCalorieHandler}
+            />
+          </Form>
+        </div>
+
+        <CalorieDisplay calorieTotal={calorieTotal} />
         <Searcher
           onSearchSubmit={onSearchSubmit}
           style={{
@@ -58,22 +132,17 @@ const App = (props) => {
             justifyContent: "center",
           }}
         />
-        <Row>
+        {/* <Row>
           {displayedInfo.length > 0 &&
             displayedInfo.map((displayedInfo) => {
               return (
                 <div
-                  // style={{
-                  //   display: "grid",
-                  //   width: "30%",
-                  //   margin: "auto",
-                  // }}
-                  style={{
-                    display: "grid",
-                    // gridTemplateColumns: "auto auto auto",
-                    margin: "1.2em",
-                    width: "33%",
-                  }}
+                // style={{
+                //   display: "grid",
+                //   // gridTemplateColumns: "auto auto auto",
+                //   margin: "1.2em",
+                //   width: "33%",
+                // }}
                 >
                   <Col>
                     <IndividualFood
@@ -85,7 +154,14 @@ const App = (props) => {
                 </div>
               );
             })}
-        </Row>
+        </Row> */}
+        <Table
+          displayedInfo={displayedInfo}
+          fatTotal={fatTotal}
+          proteinTotal={proteinTotal}
+          carbsTotal={carbsTotal}
+          calorieTotal={calorieTotal}
+        />
 
         {/* {displayedInfo.length > 0 && (
           <Row>
