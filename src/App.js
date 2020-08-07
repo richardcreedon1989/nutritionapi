@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
 import Basket from "./components/Basket";
 import CalorieDisplay from "./components/CalorieDisplay";
-import Table from "./components/FoodTable";
+import FoodTable from "./components/FoodTable";
 import Sliders from "./components/Slider";
 import NutrientRatio from "./components/NutrientRatio";
 import MultiSliderNutrient from "./components/MultiSliderNutrient";
@@ -42,9 +43,21 @@ const App = (props) => {
     fat: 20,
   });
 
-  const calorieCalculator = (props) => {
-    setCalorieTotal(calorieTotal - props.value);
-    console.log("cals total", calorieTotal);
+  // const calorieCalculator = (props) => {
+  //   setCalorieTotal(calorieTotal - props.value);
+  //   console.log("cals total", calorieTotal);
+  // };
+
+  const removeRow = (props) => {
+    let deletedRowNewArray = displayedInfo.filter((row) => {
+      return row.id !== props.id;
+    });
+
+    setCalorieTotal(calorieTotal - props.calories);
+    setFatTotal(fatTotal - props.fat);
+    setCarbsTotal(carbsTotal - props.carbs);
+    setProteinTotal(proteinTotal - props.protein);
+    setDisplayedInfo(deletedRowNewArray);
   };
 
   const setCalorieHandler = (e) => {
@@ -71,6 +84,7 @@ const App = (props) => {
             fat: response.data.totalNutrients.FAT.quantity.toFixed(),
             carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
             protein: response.data.totalNutrients.PROCNT.quantity.toFixed(),
+            id: uuidv4(),
           },
         ]);
         setCalorieTotal(calorieTotal + parseInt(response.data.calories));
@@ -132,35 +146,13 @@ const App = (props) => {
             justifyContent: "center",
           }}
         />
-        {/* <Row>
-          {displayedInfo.length > 0 &&
-            displayedInfo.map((displayedInfo) => {
-              return (
-                <div
-                // style={{
-                //   display: "grid",
-                //   // gridTemplateColumns: "auto auto auto",
-                //   margin: "1.2em",
-                //   width: "33%",
-                // }}
-                >
-                  <Col>
-                    <IndividualFood
-                      style={{ gridColumnStart: "1", gridColumnEnd: "3" }}
-                      calorieCalculator={calorieCalculator}
-                      displayedInfo={displayedInfo}
-                    />
-                  </Col>
-                </div>
-              );
-            })}
-        </Row> */}
-        <Table
+        <FoodTable
           displayedInfo={displayedInfo}
           fatTotal={fatTotal}
           proteinTotal={proteinTotal}
           carbsTotal={carbsTotal}
           calorieTotal={calorieTotal}
+          removeRow={removeRow}
         />
 
         {/* {displayedInfo.length > 0 && (

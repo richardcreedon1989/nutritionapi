@@ -14,7 +14,8 @@
     "react-multi-bar-slider": "^1.4.0",
     "react-rangeslider": "^2.2.0",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.5.1"
+    "reactstrap": "^8.5.1",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -3,15 +3,17 @@ import { Table } from "reactstrap";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 //Make the table row a different component https://stackoverflow.com/questions/40044861/get-key-index-on-click-es6-react
-const FoodTable = ({
-  displayedInfo,
-  fatTotal,
-  proteinTotal,
-  carbsTotal,
-  calorieTotal,
-}) => {
-  const removeRow = (index) => {
-    console.log("clicked12", index);
+const FoodTable = (props) => {
+  const {
+    displayedInfo,
+    fatTotal,
+    proteinTotal,
+    carbsTotal,
+    calorieTotal,
+  } = props;
+
+  const removeRow = (e) => {
+    props.removeRow(e);
   };
   return (
     <div>
@@ -31,7 +33,7 @@ const FoodTable = ({
           {displayedInfo.length > 0 &&
             displayedInfo.map((displayedInfo, index) => {
               return (
-                <tr key={index}>
+                <tr key={displayedInfo.id}>
                   <th scope="row">{index + 1}</th>
                   <td>{displayedInfo.name}</td>
                   <td>{displayedInfo.fat} g</td>
@@ -40,7 +42,7 @@ const FoodTable = ({
                   <td>{displayedInfo.calories} kCal </td>
                   <td>
                     <BsFillPlusCircleFill
-                      onClick={(index) => removeRow}
+                      onClick={() => removeRow(displayedInfo)}
                     ></BsFillPlusCircleFill>{" "}
                   </td>
                 </tr>
