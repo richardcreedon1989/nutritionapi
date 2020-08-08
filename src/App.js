@@ -2,69 +2,54 @@ import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
-import IndividualFood from "./components/IndividualFood";
 import Searcher from "./components/Searcher";
-import Basket from "./components/Basket";
+
 import CalorieDisplay from "./components/CalorieDisplay";
 import FoodTable from "./components/FoodTable";
-import Sliders from "./components/Slider";
-import NutrientRatio from "./components/NutrientRatio";
-import MultiSliderNutrient from "./components/MultiSliderNutrient";
+import Chart from "./components/Chart";
 
-import {
-  Card,
-  Label,
-  CardBody,
-  Input,
-  Form,
-  Row,
-  Col,
-  CardTitle,
-  Button,
-  CardText,
-} from "reactstrap";
+import { Label, Input, Form } from "reactstrap";
 
+//Todo
+//Deconstruct some of the response data etc
+//Get RemainingMacrosRow
+//Fix width of table (grid???)
+//Remove the extra components?
 const App = (props) => {
-  const [displayedInfo, setDisplayedInfo] = useState([]); //combining the term searched and the API return data for display
-  const [setErrorResponse] = useState(false);
-  const [calorieTotal, setCalorieTotal] = useState(0);
-  const [calorieSelected, setCalorieSelected] = useState(1800);
-  const [protein, setProtein] = useState(40);
-  const [carbs, setCarbs] = useState(40);
-  const [fat, setFat] = useState(20);
+  const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800);
 
-  const [fatTotal, setFatTotal] = useState(0);
-  const [carbsTotal, setCarbsTotal] = useState(0);
-  const [proteinTotal, setProteinTotal] = useState(0);
+  const [foodItemDetails, setFoodItemDetails] = useState([]);
 
-  const [nutrientPercentage, setNutrientPercentage] = useState({
+  const [sumOfFoodItems, setSumOfFoodItems] = useState({
+    protein: 0,
+    carbs: 0,
+    calories: 0,
+    fat: 0,
+  });
+
+  const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({
     protein: 40,
     carbs: 40,
     fat: 20,
   });
 
-  // const calorieCalculator = (props) => {
-  //   setCalorieTotal(calorieTotal - props.value);
-  //   console.log("cals total", calorieTotal);
-  // };
-
   const removeRow = (props) => {
-    let deletedRowNewArray = displayedInfo.filter((row) => {
+    let deletedRowNewArray = foodItemDetails.filter((row) => {
       return row.id !== props.id;
     });
+    setFoodItemDetails(deletedRowNewArray);
 
-    setCalorieTotal(calorieTotal - props.calories);
-    setFatTotal(fatTotal - props.fat);
-    setCarbsTotal(carbsTotal - props.carbs);
-    setProteinTotal(proteinTotal - props.protein);
-    setDisplayedInfo(deletedRowNewArray);
+    setSumOfFoodItems({
+      fat: sumOfFoodItems.fat - props.fat,
+      protein: sumOfFoodItems.protein - props.protein,
+      carbs: sumOfFoodItems.carbs - props.carbs,
+      calories: sumOfFoodItems.calories - props.calories,
+    });
   };
 
   const setCalorieHandler = (e) => {
-    setCalorieSelected(e.target.value);
+    setDailyCalorieSelector(e.target.value);
   };
-
-  const ratioHandler = () => {};
 
   const onSearchSubmit = async (props) => {
     let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
@@ -74,33 +59,31 @@ const App = (props) => {
         data
       )
       .then((response) => {
-        console.log("response", response);
-        console.log("respone extra", response.data.calories);
-        setDisplayedInfo([
-          ...displayedInfo,
+        setFoodItemDetails([
+          ...foodItemDetails,
           {
             name: props,
-            calories: response.data.calories,
-            fat: response.data.totalNutrients.FAT.quantity.toFixed(),
-            carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
-            protein: response.data.totalNutrients.PROCNT.quantity.toFixed(),
             id: uuidv4(),
+            fat: response.data.totalNutrients.FAT.quantity.toFixed(),
+            protein: response.data.totalNutrients.PROCNT.quantity.toFixed(),
+            carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
+            calories: response.data.calories,
           },
         ]);
-        setCalorieTotal(calorieTotal + parseInt(response.data.calories));
-        setFatTotal(
-          fatTotal +
-            parseInt(response.data.totalNutrients.FAT.quantity.toFixed())
-        );
-        setCarbsTotal(
-          carbsTotal +
-            parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed())
-        );
-        setProteinTotal(
-          proteinTotal +
-            parseInt(response.data.totalNutrients.PROCNT.quantity.toFixed())
-        );
-        console.log("displayed", displayedInfo);
+
+        setSumOfFoodItems({
+          fat:
+            sumOfFoodItems.fat +
+            parseInt(response.data.totalNutrients.FAT.quantity.toFixed()),
+          protein:
+            sumOfFoodItems.protein +
+            parseInt(response.data.totalNutrients.PROCNT.quantity.toFixed()),
+          carbs:
+            sumOfFoodItems.carbs +
+            parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed()),
+          calories: sumOfFoodItems.calories + response.data.calories,
+        });
+        console.log("sumoffood", sumOfFoodItems);
       })
       .catch((err) => {
         console.log(err);
@@ -108,19 +91,25 @@ const App = (props) => {
   };
   return (
     <div className="Card">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(12, 1fr)",
+          margin: "25px 0px",
+        }}
+      >
+        <div style={{ gridColumn: "3/11" }}>
+          <Chart />
+        </div>
+      </div>
       <div>
         <div style={{ width: "50%" }}>
-          {`Protein: ${protein}, Carbs: ${carbs}, Fat: ${fat}`}
-          {/* <Sliders orientation="vertical" nutrientPercentage={protein} />
-          <Sliders orientation="vertical" carbs={carbs} />
-          <Sliders orientation="vertical" fat={fat} /> */}
-          {/* <NutrientRatio />
-          <MultiSliderNutrient /> */}
+          {`Protein: ${dailyMacroBreakdown.protein}, Carbs: ${dailyMacroBreakdown.carbs}, Fat: ${dailyMacroBreakdown.fat}`}
         </div>
         <div style={{ width: "50%" }}>
           <Form>
             <Label for="volume">
-              {`Select Daily Calorie Intake: ${calorieSelected}`}
+              {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
             </Label>
 
             <Input
@@ -130,51 +119,31 @@ const App = (props) => {
               min="800"
               max="6000"
               step="10"
-              value={calorieSelected}
+              value={dailyCalorieSelector}
               onChange={setCalorieHandler}
             />
           </Form>
         </div>
 
-        <CalorieDisplay calorieTotal={calorieTotal} />
+        <CalorieDisplay calorieTotal={foodItemDetails.calories} />
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(12, 1fr)",
-            margin: "50px 0px",
+            margin: "25px 0px",
           }}
         >
-          <div style={{ gridColumn: "3/10" }}>
+          <div style={{ gridColumn: "2/11" }}>
             <Searcher onSearchSubmit={onSearchSubmit} />
           </div>
         </div>
 
         <FoodTable
-          displayedInfo={displayedInfo}
-          fatTotal={fatTotal}
-          proteinTotal={proteinTotal}
-          carbsTotal={carbsTotal}
-          calorieTotal={calorieTotal}
+          foodItemDetails={foodItemDetails}
+          // displayedInfo={displayedInfo}
+          sumOfFoodItems={sumOfFoodItems}
           removeRow={removeRow}
         />
-
-        {/* {displayedInfo.length > 0 && (
-          <Row>
-            <Col sm="6">
-              <Card body>
-                {" "}
-                {displayedInfo.map((displayedInfo) => {
-                  return (
-                    <IndividualFood
-                      calorieCalculator={calorieCalculator}
-                      displayedInfo={displayedInfo}
-                    />
-                  );
-                })}
-              </Card>
-            </Col>
-          </Row>
-        )} */}
       </div>
     </div>
   );
