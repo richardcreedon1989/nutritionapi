@@ -137,15 +137,18 @@ const App = (props) => {
         </div>
 
         <CalorieDisplay calorieTotal={calorieTotal} />
-        <Searcher
-          onSearchSubmit={onSearchSubmit}
+        <div
           style={{
-            width: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "grid",
+            gridTemplateColumns: "repeat(12, 1fr)",
+            margin: "50px 0px",
           }}
-        />
+        >
+          <div style={{ gridColumn: "3/10" }}>
+            <Searcher onSearchSubmit={onSearchSubmit} />
+          </div>
+        </div>
+
         <FoodTable
           displayedInfo={displayedInfo}
           fatTotal={fatTotal}
