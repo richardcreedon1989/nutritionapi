@@ -3,11 +3,12 @@ import { Table } from "reactstrap";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 //Make the table row a different component https://stackoverflow.com/questions/40044861/get-key-index-on-click-es6-react
+
 const FoodTable = (props) => {
   const { foodItemDetails, sumOfFoodItems } = props;
   const { fat, protein, carbs, calories } = sumOfFoodItems;
 
-  console.log("sumOfFoodItems ", sumOfFoodItems);
+  console.log("sumOfFoodItems ", props);
 
   const removeRow = (e) => {
     props.removeRow(e);
@@ -47,7 +48,7 @@ const FoodTable = (props) => {
               );
             })}
         </tbody>
-        <tfoot>
+        <tbody>
           <tr style={{ backgroundColor: "grey" }}>
             <th scope="row"></th>
             <td style={{ fontWeight: "bold" }}>Total</td>
@@ -55,6 +56,18 @@ const FoodTable = (props) => {
             <td>{carbs} g</td>
             <td>{protein} g</td>
             <td>{calories} kCal </td>
+            <td> </td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr style={{ backgroundColor: "grey" }}>
+            <th scope="row"></th>
+            <td style={{ fontWeight: "bold" }}>Remaining</td>
+            <td>{props.dailyCalorieSelector - fat} g</td>
+            <td>{props.dailyCalorieSelector - carbs} g</td>
+            <td>{props.dailyCalorieSelector - protein} g</td>
+            <td>{props.dailyCalorieSelector - calories} kCal </td>
             <td> </td>
           </tr>
         </tfoot>

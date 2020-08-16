@@ -4,17 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 
 import Searcher from "./components/Searcher";
 
-import CalorieDisplay from "./components/CalorieDisplay";
+import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Chart from "./components/Chart";
 
 import { Label, Input, Form } from "reactstrap";
 
-//Todo
-//Deconstruct some of the response data etc
-//Get RemainingMacrosRow
-//Fix width of table (grid???)
-//Remove the extra components?
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800);
 
@@ -27,10 +22,14 @@ const App = (props) => {
     fat: 0,
   });
 
+  const [caloriesForMacros, setCaloriesForMacros] = useState();
+
+  const [remainingMacros, setRemainingMacros] = useState();
+
   const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({
-    protein: 40,
-    carbs: 40,
-    fat: 20,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
   });
 
   const removeRow = (props) => {
@@ -45,6 +44,26 @@ const App = (props) => {
       carbs: sumOfFoodItems.carbs - props.carbs,
       calories: sumOfFoodItems.calories - props.calories,
     });
+  };
+
+  const macrosHandler = (props) => {
+    setDailyMacroBreakdown(props);
+    const proteinCalories =
+      (dailyCalorieSelector * (dailyMacroBreakdown.protein / 100)) / 4;
+    console.log("infin", proteinCalories);
+    const carbsCalories =
+      (dailyCalorieSelector * (dailyMacroBreakdown.carbs / 100)) / 4;
+    const fatCalories =
+      (dailyCalorieSelector * (dailyMacroBreakdown.fat / 100)) / 9;
+
+    setRemainingMacros({
+      protein: proteinCalories,
+      carbs: carbsCalories,
+      fat: fatCalories,
+    });
+
+    console.log("remaining", remainingMacros);
+    // setCaloriesForMacros(dailyCalorieSelector);
   };
 
   const setCalorieHandler = (e) => {
@@ -83,7 +102,7 @@ const App = (props) => {
             parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed()),
           calories: sumOfFoodItems.calories + response.data.calories,
         });
-        console.log("sumoffood", sumOfFoodItems);
+        // console.log("sumoffood", sumOfFoodItems);
       })
       .catch((err) => {
         console.log(err);
@@ -102,10 +121,17 @@ const App = (props) => {
           <Chart />
         </div>
       </div>
+
       <div>
         <div style={{ width: "50%" }}>
-          {`Protein: ${dailyMacroBreakdown.protein}, Carbs: ${dailyMacroBreakdown.carbs}, Fat: ${dailyMacroBreakdown.fat}`}
+          {dailyMacroBreakdown && (
+            <div>
+              {" "}
+              {`Protein: ${dailyMacroBreakdown.protein}, Carbs: ${dailyMacroBreakdown.carbs}, Fat: ${dailyMacroBreakdown.fat}`}{" "}
+            </div>
+          )}
         </div>
+
         <div style={{ width: "50%" }}>
           <Form>
             <Label for="volume">
@@ -124,8 +150,7 @@ const App = (props) => {
             />
           </Form>
         </div>
-
-        <CalorieDisplay calorieTotal={foodItemDetails.calories} />
+        <MacroSelector macrosHandler={macrosHandler} />
         <div
           style={{
             display: "grid",
@@ -140,9 +165,10 @@ const App = (props) => {
 
         <FoodTable
           foodItemDetails={foodItemDetails}
-          // displayedInfo={displayedInfo}
           sumOfFoodItems={sumOfFoodItems}
           removeRow={removeRow}
+          dailyCalorieSelector={dailyCalorieSelector}
+          remainingMacros={remainingMacros}
         />
       </div>
     </div>
