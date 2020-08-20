@@ -6,10 +6,6 @@ const MacroSelector = (props) => {
   const [carbs, setCarbs] = useState();
   const [fat, setFat] = useState();
 
-  const macrosHandler = () => {
-    props.macrosHandler({ protein, carbs, fat });
-  };
-
   const proteinHandler = (e) => {
     setProtein(e);
   };
@@ -20,6 +16,10 @@ const MacroSelector = (props) => {
 
   const fatHandler = (e) => {
     setFat(e);
+  };
+
+  const macrosHandler = () => {
+    props.macrosHandler({ protein, carbs, fat });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,9 +22,13 @@ const App = (props) => {
     fat: 0,
   });
 
-  const [caloriesForMacros, setCaloriesForMacros] = useState();
+  // const [caloriesForMacros, setCaloriesForMacros] = useState();
 
-  const [remainingMacros, setRemainingMacros] = useState();
+  const [remainingMacros, setRemainingMacros] = useState({
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+  });
 
   const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({
     protein: 0,
@@ -48,9 +52,14 @@ const App = (props) => {
 
   const macrosHandler = (props) => {
     setDailyMacroBreakdown(props);
+
+    console.log("remaining", remainingMacros);
+    // setCaloriesForMacros(dailyCalorieSelector);
+  };
+
+  useEffect(() => {
     const proteinCalories =
       (dailyCalorieSelector * (dailyMacroBreakdown.protein / 100)) / 4;
-    console.log("infin", proteinCalories);
     const carbsCalories =
       (dailyCalorieSelector * (dailyMacroBreakdown.carbs / 100)) / 4;
     const fatCalories =
@@ -61,10 +70,7 @@ const App = (props) => {
       carbs: carbsCalories,
       fat: fatCalories,
     });
-
-    console.log("remaining", remainingMacros);
-    // setCaloriesForMacros(dailyCalorieSelector);
-  };
+  }, [dailyMacroBreakdown, dailyCalorieSelector]);
 
   const setCalorieHandler = (e) => {
     setDailyCalorieSelector(e.target.value);

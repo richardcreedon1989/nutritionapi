@@ -59,18 +59,19 @@ const FoodTable = (props) => {
             <td> </td>
           </tr>
         </tbody>
-
-        <tfoot>
-          <tr style={{ backgroundColor: "grey" }}>
-            <th scope="row"></th>
-            <td style={{ fontWeight: "bold" }}>Remaining</td>
-            <td>{props.dailyCalorieSelector - fat} g</td>
-            <td>{props.dailyCalorieSelector - carbs} g</td>
-            <td>{props.dailyCalorieSelector - protein} g</td>
-            <td>{props.dailyCalorieSelector - calories} kCal </td>
-            <td> </td>
-          </tr>
-        </tfoot>
+        {props.remainingMacros && (
+          <tfoot>
+            <tr style={{ backgroundColor: "grey" }}>
+              <th scope="row"></th>
+              <td style={{ fontWeight: "bold" }}>Remaining</td>
+              <td>{props.remainingMacros.fat - fat} g</td>
+              <td>{props.remainingMacros.carbs - carbs} g</td>
+              <td>{props.remainingMacros.protein - protein} g</td>
+              <td>{props.dailyCalorieSelector - calories} kCal </td>
+              <td> </td>
+            </tr>
+          </tfoot>
+        )}
       </Table>
     </div>
   );
