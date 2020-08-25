@@ -64,7 +64,7 @@ const FoodTable = (props) => {
             <tr style={{ backgroundColor: "grey" }}>
               <th scope="row"></th>
               <td style={{ fontWeight: "bold" }}>Remaining</td>
-              <td>{props.remainingMacros.fat - fat} g</td>
+              <td>{props.remainingMacros.fat.toFixed() - fat} g</td>
               <td>{props.remainingMacros.carbs - carbs} g</td>
               <td>{props.remainingMacros.protein - protein} g</td>
               <td>{props.dailyCalorieSelector - calories} kCal </td>

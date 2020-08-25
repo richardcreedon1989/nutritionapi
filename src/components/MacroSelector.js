@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Input, Form, Button } from "reactstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 
 const MacroSelector = (props) => {
   const [protein, setProtein] = useState();
@@ -19,7 +23,9 @@ const MacroSelector = (props) => {
   };
 
   const macrosHandler = () => {
-    props.macrosHandler({ protein, carbs, fat });
+    fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
+    parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
+      toast.error("Must add up to 100%");
   };
 
   return (
@@ -38,7 +44,7 @@ const MacroSelector = (props) => {
             marginRight: "10px",
           }}
         >
-          Protein{" "}
+          Protein%{" "}
         </div>
         <Input
           style={{ gridColumn: "2/4", marginRight: "10px" }}
@@ -53,7 +59,7 @@ const MacroSelector = (props) => {
             marginRight: "10px",
           }}
         >
-          Carbs{" "}
+          Carbs%{" "}
         </div>
         <Input
           style={{ gridColumn: "6/8", marginRight: "10px" }}
@@ -68,7 +74,7 @@ const MacroSelector = (props) => {
             marginRight: "10px",
           }}
         >
-          Fat{" "}
+          Fat%{" "}
         </div>
         <Input
           style={{ gridColumn: "10/12" }}

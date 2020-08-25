@@ -54,7 +54,11 @@ const chartConfigs = {
 
 class Chart extends Component {
   render() {
-    return <ReactFC {...chartConfigs} />;
+    return (
+      // <div style={{ height: "10px", width: "100px" }}>
+      <ReactFC {...chartConfigs} options={{ responsive: true }} />
+      // </div>
+    );
   }
 }
 

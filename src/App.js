@@ -7,6 +7,7 @@ import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Chart from "./components/Chart";
+import Nav from "./components/Nav";
 
 import { Label, Input, Form } from "reactstrap";
 
@@ -115,31 +116,34 @@ const App = (props) => {
       });
   };
   return (
-    <div className="Card">
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(12, 1fr)",
-          margin: "25px 0px",
-        }}
-      >
-        <div style={{ gridColumn: "3/11" }}>
-          <Chart />
-        </div>
-      </div>
-
-      <div>
-        <div style={{ width: "50%" }}>
-          {dailyMacroBreakdown && (
-            <div>
-              {" "}
-              {`Protein: ${dailyMacroBreakdown.protein}, Carbs: ${dailyMacroBreakdown.carbs}, Fat: ${dailyMacroBreakdown.fat}`}{" "}
-            </div>
-          )}
+    <>
+      <Nav />
+      <div className="Card">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(12, 1fr)",
+            margin: "25px 0px",
+          }}
+        >
+          {/* <div
+          style={{
+            postition: "relative",
+          }}
+        >
+          <Chart options={{ responsive: "true" }} />
+        </div> */}
         </div>
 
-        <div style={{ width: "50%" }}>
-          <Form>
+        <div
+          style={{
+            textAlign: "center",
+            display: "block",
+            marginRight: "auto",
+            marginLeft: "auto",
+          }}
+        >
+          <Form style={{ width: "50%" }}>
             <Label for="volume">
               {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
             </Label>
@@ -155,29 +159,31 @@ const App = (props) => {
               onChange={setCalorieHandler}
             />
           </Form>
-        </div>
-        <MacroSelector macrosHandler={macrosHandler} />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            margin: "25px 0px",
-          }}
-        >
-          <div style={{ gridColumn: "2/11" }}>
-            <Searcher onSearchSubmit={onSearchSubmit} />
-          </div>
-        </div>
 
-        <FoodTable
-          foodItemDetails={foodItemDetails}
-          sumOfFoodItems={sumOfFoodItems}
-          removeRow={removeRow}
-          dailyCalorieSelector={dailyCalorieSelector}
-          remainingMacros={remainingMacros}
-        />
+          <MacroSelector macrosHandler={macrosHandler} />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(12, 1fr)",
+              margin: "25px 0px",
+            }}
+          >
+            <div style={{ gridColumn: "2/11" }}>
+              <Searcher onSearchSubmit={onSearchSubmit} />
+            </div>
+          </div>
+
+          <FoodTable
+            foodItemDetails={foodItemDetails}
+            sumOfFoodItems={sumOfFoodItems}
+            removeRow={removeRow}
+            dailyCalorieSelector={dailyCalorieSelector}
+            remainingMacros={remainingMacros}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
