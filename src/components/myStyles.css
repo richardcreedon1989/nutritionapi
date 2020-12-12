@@ -7,17 +7,41 @@
   justify-content: center;
 }
 
+.padding-bottom {
+  padding-bottom: 2rem;
+}
+
 .formStyle {
   padding-top: 1em;
   text-align: center;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
+  margin: auto;
   width: 80%;
 }
 
 .displayGrid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  margin: 25px 0px;
+  grid-template-columns: repeat(24, 1fr);
 }
+
+.macroSelectorInputs {
+  line-height: 2.1;
+  margin-right: 10px;
+}
+
+.macroGridProteinName {
+  grid-column: 1/2;
+  margin-left: 80px;
+}
+
+.macroGridProteinInput {
+  grid-column: 2/4;
+  margin-right: 10px;
+}
+
+/* const macroSelectorGridColumn = {
+  1/2: grid-column: 1/2, 
+  2/3: grid-column: 2/3, 
+}
+
+//how id call the class
+macroSelectorGridColumn.1/2 */

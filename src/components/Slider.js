@@ -1,19 +1,10 @@
 import React, { useState } from "react";
-import Slider from "react-rangeslider";
+import { Label, Input, Form } from "reactstrap";
 
-const Sliders = () => {
-  const [volume, setVolume] = useState(40);
-
-  const handleOnChange = (value) => {
-    console.log("value slider", value);
-    setVolume(value);
-  };
-
+const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (
-    <Form>
-      <Label for="volume">
-        {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
-      </Label>
+    <div className="padding-bottom">
+      <Label for="volume">{`Select Daily Calorie Intake: ${dailyCalorieSelector}`}</Label>
 
       <Input
         type="range"
@@ -25,7 +16,7 @@ const Sliders = () => {
         value={dailyCalorieSelector}
         onChange={setCalorieHandler}
       />
-    </Form>
+    </div>
   );
 };
 

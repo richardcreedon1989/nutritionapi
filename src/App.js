@@ -1,4 +1,5 @@
-//working on changing the slider bar to its own component
+//Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -8,6 +9,7 @@ import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Chart from "./components/Chart";
+import Slider from "./components/Slider";
 
 import { Label, Input, Form, Container } from "reactstrap";
 
@@ -111,7 +113,7 @@ const App = (props) => {
             parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed()),
           calories: sumOfFoodItems.calories + response.data.calories,
         });
-        // console.log("sumoffood", sumOfFoodItems);
+        console.log("sumoffood", sumOfFoodItems);
       })
       .catch((err) => {
         console.log(err);
@@ -121,34 +123,21 @@ const App = (props) => {
     <Container>
       <Nav />
       <div className="formStyle">
-        <Form>
-          <Label for="volume">
-            {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
-          </Label>
+        <Slider
+          dailyCalorieSelector={dailyCalorieSelector}
+          setCalorieHandler={setCalorieHandler}
+        />
+        <MacroSelector
+          className="padding-bottom"
+          macrosHandler={macrosHandler}
+        />
 
-          <Input
-            type="range"
-            id="volume"
-            name="volume"
-            min="800"
-            max="6000"
-            step="10"
-            value={dailyCalorieSelector}
-            onChange={setCalorieHandler}
-          />
-        </Form>
-
-        <MacroSelector macrosHandler={macrosHandler} />
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            margin: "25px 0px",
-          }}
-        >
-          <div style={{ gridColumn: "2/11" }}>
-            <Searcher onSearchSubmit={onSearchSubmit} />
+        <div className="displayGrid">
+          <div style={{ gridColumn: "3/21" }}>
+            <Searcher
+              className="padding-bottom"
+              onSearchSubmit={onSearchSubmit}
+            />
           </div>
         </div>
 

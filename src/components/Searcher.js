@@ -17,8 +17,13 @@ const Searcher = (props) => {
 
   return (
     <div>
-      <Form onSubmit={onSearchSubmit}>
-        <Input type="text" value={searchTerm} onChange={searchChangeHandler} />
+      <Form onSubmit={onSearchSubmit} className="padding-bottom">
+        <Input
+          type="text"
+          placeholder="Enter food and grams"
+          value={searchTerm}
+          onChange={searchChangeHandler}
+        />
       </Form>
     </div>
   );

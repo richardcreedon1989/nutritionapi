@@ -1,99 +1,103 @@
 import React, { useState } from "react";
 import { Input, Form, Button } from "reactstrap";
 import { toast } from "react-toastify";
+import MacroSelectorInput from "./MacroSelectorInput";
 
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 
 const MacroSelector = (props) => {
-  const [protein, setProtein] = useState();
-  const [carbs, setCarbs] = useState();
-  const [fat, setFat] = useState();
+  const [protein, setProtein] = useState("");
+  const [carbs, setCarbs] = useState("");
+  const [fat, setFat] = useState("");
 
-  const proteinHandler = (e) => {
-    setProtein(e);
-  };
-
-  const carbsHandler = (e) => {
-    setCarbs(e);
-  };
-
-  const fatHandler = (e) => {
-    setFat(e);
+  const nutritionHandler = (e, id) => {
+    if (id === "protein") {
+      setProtein(e);
+    } else if (id === "carbs") {
+      setCarbs(e);
+    } else if (id === "fat") {
+      setFat(e);
+    }
   };
 
   const macrosHandler = () => {
+    console.log("protein", protein, "carbs", carbs, "fat", fat);
     fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
+    console.log(fat);
     parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
       toast.error("Must add up to 100%");
   };
 
   return (
-    <div>
-      <Form
+    <div className="padding-bottom displayGrid">
+      <div className="macroSelectorInputs macroGridProteinName">Protein%</div>
+      <MacroSelectorInput
+        id="protein"
+        nutritionHandler={nutritionHandler}
+        styling={styles.proteinInputStyle}
+      />
+
+      <div
+        className="macroSelectorInputs"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(24, 1fr)",
+          gridColumn: "5/6",
         }}
       >
-        <div
-          style={{
-            gridColumn: "1/2",
-            lineHeight: "1.8",
-            marginLeft: "10px",
-            marginRight: "10px",
-          }}
-        >
-          Protein%{" "}
-        </div>
-        <Input
-          style={{ gridColumn: "2/4", marginRight: "10px" }}
-          type="number"
-          name="protein"
-          onChange={(e) => proteinHandler(e.target.value)}
-        />
-        <div
-          style={{
-            gridColumn: "5/6",
-            lineHeight: "1.8",
-            marginRight: "10px",
-          }}
-        >
-          Carbs%{" "}
-        </div>
-        <Input
-          style={{ gridColumn: "6/8", marginRight: "10px" }}
-          type="number"
-          name="carbs"
-          onChange={(e) => carbsHandler(e.target.value)}
-        />
-        <div
-          style={{
-            gridColumn: "9/10",
-            lineHeight: "1.8",
-            marginRight: "10px",
-          }}
-        >
-          Fat%{" "}
-        </div>
-        <Input
-          style={{ gridColumn: "10/12" }}
-          type="number"
-          name="fat"
-          onChange={(e) => fatHandler(e.target.value)}
-        />
+        Carbs%{" "}
+      </div>
+      <MacroSelectorInput
+        nutritionHandler={nutritionHandler}
+        styling={styles.carbsInputStyle}
+        id="carbs"
+      />
 
-        <Button
-          style={{ gridColumn: "14/18" }}
-          name="approve"
-          onClick={macrosHandler}
-        >
-          Calculate
-        </Button>
-      </Form>
+      <div
+        className="macroSelectorInputs"
+        style={{
+          gridColumn: "9/10",
+        }}
+      >
+        Fat%{" "}
+      </div>
+      <MacroSelectorInput
+        nutritionHandler={nutritionHandler}
+        styling={styles.fatInputStyle}
+        id="fat"
+      />
+
+      <Button
+        style={{ gridColumn: "14/18" }}
+        name="approve"
+        onClick={macrosHandler}
+      >
+        Calculate
+      </Button>
     </div>
   );
 };
+
+const styles = {
+  proteinInputStyle: {
+    marginRight: "10px",
+    gridColumn: "4/8",
+    width: "4em",
+  },
+  carbsInputStyle: {
+    marginRight: "10px",
+    gridColumn: "12/16",
+    width: "4em",
+  },
+  fatInputStyle: {
+    marginRight: "10px",
+    gridColumn: "20/24",
+    width: "4em",
+  },
+};
+// const macroSelectorGridColumns = {
+//   proteinName: { gridColumn: "1 / 2" },
+//   proteinInput: { gridColumn: "2/4" },
+// };
 
 export default MacroSelector;
