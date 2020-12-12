@@ -10,12 +10,22 @@ const Sliders = () => {
   };
 
   return (
-    <Slider
-      value={volume}
-      orientation="vertical"
-      onChange={handleOnChange}
-      handleLabel="string"
-    />
+    <Form>
+      <Label for="volume">
+        {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
+      </Label>
+
+      <Input
+        type="range"
+        id="volume"
+        name="volume"
+        min="800"
+        max="6000"
+        step="10"
+        value={dailyCalorieSelector}
+        onChange={setCalorieHandler}
+      />
+    </Form>
   );
 };
 

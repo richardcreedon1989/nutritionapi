@@ -1,18 +1,7 @@
 import React from "react";
 
 const Nav = () => {
-  return (
-    <div
-      style={{
-        backgroundColor: "lightBlue",
-        textAlign: "center",
-        color: "white",
-        height: "2em",
-      }}
-    >
-      Nutrition Calculator
-    </div>
-  );
+  return <h1 className="nav">Nutrition Calculator</h1>;
 };
 
 export default Nav;

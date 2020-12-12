@@ -1,3 +1,4 @@
+//working on changing the slider bar to its own component
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -7,10 +8,10 @@ import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Chart from "./components/Chart";
+
+import { Label, Input, Form, Container } from "reactstrap";
+
 import Nav from "./components/Nav";
-
-import { Label, Input, Form } from "reactstrap";
-
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800);
 
@@ -85,6 +86,7 @@ const App = (props) => {
         data
       )
       .then((response) => {
+        console.log(response);
         setFoodItemDetails([
           ...foodItemDetails,
           {
@@ -116,9 +118,28 @@ const App = (props) => {
       });
   };
   return (
-    <>
+    <Container>
       <Nav />
-      <div className="Card">
+      <div className="formStyle">
+        <Form>
+          <Label for="volume">
+            {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
+          </Label>
+
+          <Input
+            type="range"
+            id="volume"
+            name="volume"
+            min="800"
+            max="6000"
+            step="10"
+            value={dailyCalorieSelector}
+            onChange={setCalorieHandler}
+          />
+        </Form>
+
+        <MacroSelector macrosHandler={macrosHandler} />
+
         <div
           style={{
             display: "grid",
@@ -126,64 +147,20 @@ const App = (props) => {
             margin: "25px 0px",
           }}
         >
-          {/* <div
-          style={{
-            postition: "relative",
-          }}
-        >
-          <Chart options={{ responsive: "true" }} />
-        </div> */}
-        </div>
-
-        <div
-          style={{
-            textAlign: "center",
-            display: "block",
-            marginRight: "auto",
-            marginLeft: "auto",
-          }}
-        >
-          <Form style={{ width: "50%" }}>
-            <Label for="volume">
-              {`Select Daily Calorie Intake: ${dailyCalorieSelector}`}
-            </Label>
-
-            <Input
-              type="range"
-              id="volume"
-              name="volume"
-              min="800"
-              max="6000"
-              step="10"
-              value={dailyCalorieSelector}
-              onChange={setCalorieHandler}
-            />
-          </Form>
-
-          <MacroSelector macrosHandler={macrosHandler} />
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(12, 1fr)",
-              margin: "25px 0px",
-            }}
-          >
-            <div style={{ gridColumn: "2/11" }}>
-              <Searcher onSearchSubmit={onSearchSubmit} />
-            </div>
+          <div style={{ gridColumn: "2/11" }}>
+            <Searcher onSearchSubmit={onSearchSubmit} />
           </div>
-
-          <FoodTable
-            foodItemDetails={foodItemDetails}
-            sumOfFoodItems={sumOfFoodItems}
-            removeRow={removeRow}
-            dailyCalorieSelector={dailyCalorieSelector}
-            remainingMacros={remainingMacros}
-          />
         </div>
+
+        <FoodTable
+          foodItemDetails={foodItemDetails}
+          sumOfFoodItems={sumOfFoodItems}
+          removeRow={removeRow}
+          dailyCalorieSelector={dailyCalorieSelector}
+          remainingMacros={remainingMacros}
+        />
       </div>
-    </>
+    </Container>
   );
 };
 

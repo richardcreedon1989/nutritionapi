@@ -1,0 +1,23 @@
+.nav {
+  padding: 1em;
+  background-color: #538cc6;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.formStyle {
+  padding-top: 1em;
+  text-align: center;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
+}
+
+.displayGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin: 25px 0px;
+}
