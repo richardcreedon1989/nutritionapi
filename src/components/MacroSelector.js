@@ -8,9 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 const MacroSelector = (props) => {
-  const [protein, setProtein] = useState("");
-  const [carbs, setCarbs] = useState("");
-  const [fat, setFat] = useState("");
+  const [protein, setProtein] = useState();
+  const [carbs, setCarbs] = useState();
+  const [fat, setFat] = useState();
 
   const nutritionHandler = (e, id) => {
     if (id === "protein") {
@@ -20,58 +20,56 @@ const MacroSelector = (props) => {
     } else if (id === "fat") {
       setFat(e);
     }
-  };
+  }; //sets % user wants for each of the macros
 
   const macrosHandler = () => {
-    console.log("protein", protein, "carbs", carbs, "fat", fat);
     fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
-    console.log(fat);
     parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
       toast.error("Must add up to 100%");
-  };
+  }; //passes macros up to App component to allow for calculation for calories total/remaining etc
 
   return (
-    <div className="padding-bottom displayGrid">
-      <div className="macroSelectorInputs macroGridProteinName">Protein%</div>
+    <div className="padding-bottom displayGrid rcorners2">
+      <label
+        htmlFor="protein"
+        className="macroSelectorInputs macroGridProteinName"
+        style={styles.proteinLabelGridValues}
+      >
+        Protein%:
+      </label>
       <MacroSelectorInput
         id="protein"
         nutritionHandler={nutritionHandler}
-        styling={styles.proteinInputStyle}
+        styling={styles.proteinInputComponentStyle} //passing down styling to the input so all are consistent
       />
 
-      <div
+      <label
+        htmlFor="carbs"
         className="macroSelectorInputs"
-        style={{
-          gridColumn: "5/6",
-        }}
+        style={styles.carbsLabelGridValues}
       >
-        Carbs%{" "}
-      </div>
+        Carbs%:
+      </label>
       <MacroSelectorInput
         nutritionHandler={nutritionHandler}
-        styling={styles.carbsInputStyle}
+        styling={styles.carbsInputComponentStyle}
         id="carbs"
       />
 
-      <div
+      <label
+        htmlFor="fat"
         className="macroSelectorInputs"
-        style={{
-          gridColumn: "9/10",
-        }}
+        style={styles.fatLabelGridValues}
       >
-        Fat%{" "}
-      </div>
+        Fat%:
+      </label>
       <MacroSelectorInput
         nutritionHandler={nutritionHandler}
-        styling={styles.fatInputStyle}
+        styling={styles.fatInputComponentStyle}
         id="fat"
       />
 
-      <Button
-        style={{ gridColumn: "14/18" }}
-        name="approve"
-        onClick={macrosHandler}
-      >
+      <Button style={styles.macroButton} name="approve" onClick={macrosHandler}>
         Calculate
       </Button>
     </div>
@@ -79,25 +77,30 @@ const MacroSelector = (props) => {
 };
 
 const styles = {
-  proteinInputStyle: {
-    marginRight: "10px",
-    gridColumn: "4/8",
-    width: "4em",
+  proteinLabelGridValues: {
+    gridColumn: "2/3",
   },
-  carbsInputStyle: {
-    marginRight: "10px",
+  carbsLabelGridValues: {
+    gridColumn: "4/5",
+  },
+  fatLabelGridValues: {
+    gridColumn: "6/7",
+  },
+  macroButton: {
     gridColumn: "12/16",
-    width: "4em",
   },
-  fatInputStyle: {
-    marginRight: "10px",
-    gridColumn: "20/24",
+  proteinInputComponentStyle: {
     width: "4em",
+    marginRight: "1em",
+  },
+  carbsInputComponentStyle: {
+    width: "4em",
+    marginRight: "1em",
+  },
+  fatInputComponentStyle: {
+    width: "4em",
+    marginRight: "-50px",
   },
 };
-// const macroSelectorGridColumns = {
-//   proteinName: { gridColumn: "1 / 2" },
-//   proteinInput: { gridColumn: "2/4" },
-// };
 
 export default MacroSelector;

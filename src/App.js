@@ -13,9 +13,8 @@ import Slider from "./components/Slider";
 
 import { Label, Input, Form, Container } from "reactstrap";
 
-import Nav from "./components/Nav";
 const App = (props) => {
-  const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800);
+  const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar
 
   const [foodItemDetails, setFoodItemDetails] = useState([]);
 
@@ -24,7 +23,7 @@ const App = (props) => {
     carbs: 0,
     calories: 0,
     fat: 0,
-  });
+  }); //Total Macros of all foods searched and not removed
 
   // const [caloriesForMacros, setCaloriesForMacros] = useState();
 
@@ -32,13 +31,13 @@ const App = (props) => {
     protein: 0,
     fat: 0,
     carbs: 0,
-  });
+  }); //DailyMacrosAllowed - sumOfFoodItems so far
 
   const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({
     protein: 0,
     carbs: 0,
     fat: 0,
-  });
+  }); // T
 
   const removeRow = (props) => {
     let deletedRowNewArray = foodItemDetails.filter((row) => {
@@ -121,12 +120,14 @@ const App = (props) => {
   };
   return (
     <Container>
-      <Nav />
+      <h1 className="nav">Nutrition Calculator</h1>
       <div className="formStyle">
         <Slider
           dailyCalorieSelector={dailyCalorieSelector}
           setCalorieHandler={setCalorieHandler}
         />
+        <h1> Select Macronutrients as a % of overall diet </h1>
+
         <MacroSelector
           className="padding-bottom"
           macrosHandler={macrosHandler}

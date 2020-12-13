@@ -5,10 +5,10 @@ const MacroSelectorInput = ({ nutritionHandler, styling, id }) => {
   return (
     <div>
       <Input
-        className="input-large"
         style={styling}
         type="number"
         width="100%"
+        id={id}
         onChange={(e) => nutritionHandler(e.target.value, id)}
       />
     </div>
