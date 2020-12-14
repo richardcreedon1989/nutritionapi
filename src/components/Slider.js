@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Label, Input, Form } from "reactstrap";
+import React from "react";
+import { Label, Input } from "reactstrap";
 
 const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (

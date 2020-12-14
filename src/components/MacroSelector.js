@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Form, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import { toast } from "react-toastify";
 import MacroSelectorInput from "./MacroSelectorInput";
 
@@ -8,21 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 const MacroSelector = (props) => {
-  const [protein, setProtein] = useState();
-  const [carbs, setCarbs] = useState();
-  const [fat, setFat] = useState();
+  const [macro, setMacro] = useState({ protein: 0, carbs: 0, fat: 0 });
 
   const nutritionHandler = (e, id) => {
-    if (id === "protein") {
-      setProtein(e);
-    } else if (id === "carbs") {
-      setCarbs(e);
-    } else if (id === "fat") {
-      setFat(e);
-    }
+    setMacro({ ...macro, [id]: [e] });
+    console.log(macro);
   }; //sets % user wants for each of the macros
 
   const macrosHandler = () => {
+    const { protein, fat, carbs } = macro;
     fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
     parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
       toast.error("Must add up to 100%");
@@ -69,7 +63,7 @@ const MacroSelector = (props) => {
         id="fat"
       />
 
-      <Button style={styles.macroButton} name="approve" onClick={macrosHandler}>
+      <Button style={styles.macroButton} onClick={macrosHandler}>
         Calculate
       </Button>
     </div>

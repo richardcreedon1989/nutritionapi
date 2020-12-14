@@ -1,5 +1,5 @@
 //Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
-
+//CSS Grid is not responsive right now - look in to auto fit/fill
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -8,10 +8,9 @@ import Searcher from "./components/Searcher";
 
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
-import Chart from "./components/Chart";
 import Slider from "./components/Slider";
 
-import { Label, Input, Form, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar
@@ -25,26 +24,20 @@ const App = (props) => {
     fat: 0,
   }); //Total Macros of all foods searched and not removed
 
-  // const [caloriesForMacros, setCaloriesForMacros] = useState();
-
   const [remainingMacros, setRemainingMacros] = useState({
     protein: 0,
     fat: 0,
     carbs: 0,
   }); //DailyMacrosAllowed - sumOfFoodItems so far
 
-  const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({
-    protein: 0,
-    carbs: 0,
-    fat: 0,
-  }); // T
+  const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({}); //
 
+  console.log("propsApp", props);
   const removeRow = (props) => {
     let deletedRowNewArray = foodItemDetails.filter((row) => {
       return row.id !== props.id;
     });
     setFoodItemDetails(deletedRowNewArray);
-
     setSumOfFoodItems({
       fat: sumOfFoodItems.fat - props.fat,
       protein: sumOfFoodItems.protein - props.protein,
@@ -55,9 +48,7 @@ const App = (props) => {
 
   const macrosHandler = (props) => {
     setDailyMacroBreakdown(props);
-
-    console.log("remaining", remainingMacros);
-    // setCaloriesForMacros(dailyCalorieSelector);
+    // console.log("macrohandler", props);
   };
 
   useEffect(() => {
