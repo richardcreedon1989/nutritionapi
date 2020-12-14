@@ -1,21 +1,18 @@
 //Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
 //CSS Grid is not responsive right now - look in to auto fit/fill
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { Container } from "reactstrap";
 
 import Searcher from "./components/Searcher";
-
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Slider from "./components/Slider";
 
-import { Container } from "reactstrap";
-
 const App = (props) => {
-  const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar
-
-  const [foodItemDetails, setFoodItemDetails] = useState([]);
+  const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar Value
+  const [foodItemDetails, setFoodItemDetails] = useState([]); //Stored response from API call with searchterm/calories/fat/protein/carbs.iud
 
   const [sumOfFoodItems, setSumOfFoodItems] = useState({
     protein: 0,
@@ -30,9 +27,6 @@ const App = (props) => {
     carbs: 0,
   }); //DailyMacrosAllowed - sumOfFoodItems so far
 
-  const [dailyMacroBreakdown, setDailyMacroBreakdown] = useState({}); //
-
-  console.log("propsApp", props);
   const removeRow = (props) => {
     let deletedRowNewArray = foodItemDetails.filter((row) => {
       return row.id !== props.id;
@@ -44,31 +38,26 @@ const App = (props) => {
       carbs: sumOfFoodItems.carbs - props.carbs,
       calories: sumOfFoodItems.calories - props.calories,
     });
-  };
+  }; //Remove row when user selectes delete option. props.id coming from FoodTable component
 
   const macrosHandler = (props) => {
-    setDailyMacroBreakdown(props);
-    // console.log("macrohandler", props);
-  };
-
-  useEffect(() => {
-    const proteinCalories =
-      (dailyCalorieSelector * (dailyMacroBreakdown.protein / 100)) / 4;
-    const carbsCalories =
-      (dailyCalorieSelector * (dailyMacroBreakdown.carbs / 100)) / 4;
-    const fatCalories =
-      (dailyCalorieSelector * (dailyMacroBreakdown.fat / 100)) / 9;
+    const { protein, carbs, fat } = props;
+    const proteinCalories = (dailyCalorieSelector * (protein / 100)) / 4;
+    const carbsCalories = (dailyCalorieSelector * (carbs / 100)) / 4;
+    const fatCalories = (dailyCalorieSelector * (fat / 100)) / 9;
 
     setRemainingMacros({
       protein: proteinCalories,
       carbs: carbsCalories,
       fat: fatCalories,
     });
-  }, [dailyMacroBreakdown, dailyCalorieSelector]);
-
-  const setCalorieHandler = (e) => {
-    setDailyCalorieSelector(e.target.value);
   };
+  //receives the % macros set in MacroSelector component
+  //and multiples by each macros calorie per gram to work out calories for each macro
+
+  const setCalorieHandler = (props) => {
+    setDailyCalorieSelector(props.target.value);
+  }; //Setting total daily calories. Passed from Slider component
 
   const onSearchSubmit = async (props) => {
     let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
@@ -78,7 +67,6 @@ const App = (props) => {
         data
       )
       .then((response) => {
-        console.log(response);
         setFoodItemDetails([
           ...foodItemDetails,
           {
@@ -89,7 +77,7 @@ const App = (props) => {
             carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
             calories: response.data.calories,
           },
-        ]);
+        ]); //Storing searched item and its individuak nutritional info in App state alongside previously searched items to dispaly in the FoodTable component rows
 
         setSumOfFoodItems({
           fat:
@@ -102,8 +90,7 @@ const App = (props) => {
             sumOfFoodItems.carbs +
             parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed()),
           calories: sumOfFoodItems.calories + response.data.calories,
-        });
-        console.log("sumoffood", sumOfFoodItems);
+        }); //Adding the NB NB calories here may be not neccessary as its not used - additionally where we work out the calories elsewhere may not be useful eithert
       })
       .catch((err) => {
         console.log(err);
