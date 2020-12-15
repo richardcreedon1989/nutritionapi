@@ -23,7 +23,7 @@ const MacroSelector = (props) => {
   }; //passes macros up to App component to allow for calculation for calories total/remaining etc
 
   return (
-    <div className="padding-bottom displayGrid rcorners2">
+    <div className="padding-bottom displayGrid ">
       <label
         htmlFor="protein"
         className="macroSelectorInputs macroGridProteinName"

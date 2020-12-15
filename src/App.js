@@ -1,5 +1,6 @@
 //Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
 //CSS Grid is not responsive right now - look in to auto fit/fill
+//Continue styling calorie selector etc - give light grey background - add more icons perhaps?
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -9,10 +10,11 @@ import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Slider from "./components/Slider";
+import Jumbo from "./components/Jumbotron";
 
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar Value
-  const [foodItemDetails, setFoodItemDetails] = useState([]); //Stored response from API call with searchterm/calories/fat/protein/carbs.iud
+  const [foodItemDetails, setFoodItemDetails] = useState([]); //Stored response from API call with searchterm/calories/fat/protein/carbs/iud
 
   const [sumOfFoodItems, setSumOfFoodItems] = useState({
     protein: 0,
@@ -42,25 +44,25 @@ const App = (props) => {
 
   const macrosHandler = (props) => {
     const { protein, carbs, fat } = props;
-    const proteinCalories = (dailyCalorieSelector * (protein / 100)) / 4;
-    const carbsCalories = (dailyCalorieSelector * (carbs / 100)) / 4;
-    const fatCalories = (dailyCalorieSelector * (fat / 100)) / 9;
+    const proteinGrams = (dailyCalorieSelector * (protein / 100)) / 4;
+    const carbGrams = (dailyCalorieSelector * (carbs / 100)) / 4;
+    const fatGrams = (dailyCalorieSelector * (fat / 100)) / 9;
 
     setRemainingMacros({
-      protein: proteinCalories,
-      carbs: carbsCalories,
-      fat: fatCalories,
+      protein: proteinGrams,
+      carbs: carbGrams,
+      fat: fatGrams,
     });
   };
   //receives the % macros set in MacroSelector component
-  //and multiples by each macros calorie per gram to work out calories for each macro
+  //and divides the & against the daily calories selected to give grams required per macro
 
   const setCalorieHandler = (props) => {
     setDailyCalorieSelector(props.target.value);
   }; //Setting total daily calories. Passed from Slider component
 
   const onSearchSubmit = async (props) => {
-    let data = { title: props, ingr: [props] }; //ingr = ingredients list + title required
+    let data = { title: props, ingr: [props] }; // ingredients list + title required
     await axios
       .post(
         `https://api.edamam.com/api/nutrition-details?app_id=8b84adef&app_key=a931603d6a495dba409096cbf9eb7f71`,
@@ -77,8 +79,8 @@ const App = (props) => {
             carbs: response.data.totalNutrients.CHOCDF.quantity.toFixed(),
             calories: response.data.calories,
           },
-        ]); //Storing searched item and its individuak nutritional info in App state alongside previously searched items to dispaly in the FoodTable component rows
-
+        ]); //Storing searched item and its individual nutritional info in App state alongside previously searched items to dispaly in the FoodTable component rows
+        console.log("remain macro", remainingMacros);
         setSumOfFoodItems({
           fat:
             sumOfFoodItems.fat +
@@ -90,26 +92,27 @@ const App = (props) => {
             sumOfFoodItems.carbs +
             parseInt(response.data.totalNutrients.CHOCDF.quantity.toFixed()),
           calories: sumOfFoodItems.calories + response.data.calories,
-        }); //Adding the NB NB calories here may be not neccessary as its not used - additionally where we work out the calories elsewhere may not be useful eithert
+        }); //Taking previous grams for each macro and adding it to the newly searched food item
       })
       .catch((err) => {
         console.log(err);
       });
   };
   return (
-    <Container>
-      <h1 className="nav">Nutrition Calculator</h1>
-      <div className="formStyle">
-        <Slider
-          dailyCalorieSelector={dailyCalorieSelector}
-          setCalorieHandler={setCalorieHandler}
-        />
-        <h1> Select Macronutrients as a % of overall diet </h1>
-
-        <MacroSelector
-          className="padding-bottom"
-          macrosHandler={macrosHandler}
-        />
+    <Container className="bg-light">
+      <h1 className="nav shadow p-4 mb-4 ">Nutrition API</h1>
+      <Jumbo />
+      <div className=" shadow p-4 mb-4">
+        <div>
+          <Slider
+            dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
+            setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
+          />
+          <MacroSelector
+            className="padding-bottom"
+            macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
+          />
+        </div>
 
         <div className="displayGrid">
           <div style={{ gridColumn: "3/21" }}>
@@ -121,11 +124,11 @@ const App = (props) => {
         </div>
 
         <FoodTable
-          foodItemDetails={foodItemDetails}
-          sumOfFoodItems={sumOfFoodItems}
+          foodItemDetails={foodItemDetails} //Passing down the cals/grams/name etc to display in a row
+          sumOfFoodItems={sumOfFoodItems} //Passing down the total cals etc to display
           removeRow={removeRow}
-          dailyCalorieSelector={dailyCalorieSelector}
-          remainingMacros={remainingMacros}
+          dailyCalorieSelector={dailyCalorieSelector} //Passing down total calories selected for diet to calculate remaining calories
+          remainingMacros={remainingMacros} // Passing down to dispaly remaing grams for each macro
         />
       </div>
     </Container>

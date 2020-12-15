@@ -3,7 +3,7 @@ import { Label, Input } from "reactstrap";
 
 const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (
-    <div className="padding-bottom">
+    <div className="padding-bottom text-center font-weight-light">
       <Label for="volume">{`Select Daily Calorie Intake: ${dailyCalorieSelector}`}</Label>
 
       <Input

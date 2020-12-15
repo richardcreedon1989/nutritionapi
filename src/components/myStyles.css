@@ -11,12 +11,12 @@
   padding-bottom: 2rem;
 }
 
-.formStyle {
+/* .formStyle {
   padding-top: 1em;
   text-align: center;
   margin: auto;
   width: 80%;
-}
+} */
 
 .displayGrid {
   display: grid;
