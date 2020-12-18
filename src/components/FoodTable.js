@@ -16,15 +16,15 @@ const FoodTable = (props) => {
 
   return (
     <div>
-      <Table striped>
+      <Table className="table table-responsive-m" striped>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Food & Quantity</th>
-            <th>Fat </th>
-            <th>Carbs</th>
-            <th>Protein</th>
-            <th>Calories</th>
+            <th scope="col">#</th>
+            <th scope="col">Food & Quantity</th>
+            <th scope="col">Fat </th>
+            <th scope="col">Carbs</th>
+            <th scope="col">Protein</th>
+            <th scope="col">Calories</th>
           </tr>
         </thead>
 

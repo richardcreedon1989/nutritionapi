@@ -1,16 +1,20 @@
 //Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
 //CSS Grid is not responsive right now - look in to auto fit/fill
 //Continue styling calorie selector etc - give light grey background - add more icons perhaps?
+//Error handling for no search result - Modal pops up saying sorry?
+//remove grid from macroselector plus other styles to get responsive inputs
+
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { Container } from "reactstrap";
+import { Container, Label, Input } from "reactstrap";
 
 import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Slider from "./components/Slider";
 import Jumbo from "./components/Jumbotron";
+import MacroTester from "./components/MacroTester";
 
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar Value
@@ -80,7 +84,7 @@ const App = (props) => {
             calories: response.data.calories,
           },
         ]); //Storing searched item and its individual nutritional info in App state alongside previously searched items to dispaly in the FoodTable component rows
-        console.log("remain macro", remainingMacros);
+        console.log("response", response);
         setSumOfFoodItems({
           fat:
             sumOfFoodItems.fat +
@@ -108,10 +112,11 @@ const App = (props) => {
             dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
             setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
           />
-          <MacroSelector
+          {/* <MacroSelector
             className="padding-bottom"
             macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-          />
+          /> */}
+          <MacroTester />
         </div>
 
         <div className="displayGrid">

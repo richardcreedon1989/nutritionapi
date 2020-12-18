@@ -11,6 +11,8 @@
   padding-bottom: 2rem;
 }
 
+@media only screen and (min-width: 768px) {
+}
 /* .formStyle {
   padding-top: 1em;
   text-align: center;
@@ -18,9 +20,25 @@
   width: 80%;
 } */
 
+.inputStuff {
+  width: 25%;
+  height: 70%;
+}
+
 .displayGrid {
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(24, 1fr, auto);
+  grid-template-columns: repeat(4, 1fr, auto);
+}
+
+.displayTester {
+  --auto-grid-min-size: 3rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
+  grid-gap: 1rem;
 }
 
 .macroSelectorInputs {
