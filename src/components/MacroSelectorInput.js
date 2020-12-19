@@ -5,7 +5,7 @@ const MacroSelectorInput = ({ nutritionHandler, styling, id }) => {
   return (
     <>
       <Input
-        style={{ display: "inline" }}
+        // style={{ display: "inline" }}
         className="inputStuff"
         type="number"
         id={id}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Form } from "reactstrap";
 import { toast } from "react-toastify";
 import MacroSelectorInput from "./MacroSelectorInput";
 
@@ -15,7 +15,10 @@ const MacroSelector = (props) => {
     console.log(macro);
   }; //sets % user wants for each of the macros
 
-  const macrosHandler = () => {
+  console.log("macroProps", props);
+
+  const macrosHandler = (e) => {
+    e.preventDefault();
     const { protein, fat, carbs } = macro;
     fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
     parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
@@ -23,78 +26,32 @@ const MacroSelector = (props) => {
   }; //passes macros up to App component to allow for calculation for calories total/remaining etc
 
   return (
-    <div className="padding-bottom displayGrid ">
-      <label
-        htmlFor="protein"
-        className="macroSelectorInputs macroGridProteinName"
-        style={styles.proteinLabelGridValues}
-      >
-        Protein%:
-      </label>
-      <MacroSelectorInput
-        id="protein"
-        nutritionHandler={nutritionHandler}
-        styling={styles.proteinInputComponentStyle} //passing down styling to the input so all are consistent
-      />
-
-      <label
-        htmlFor="carbs"
-        className="macroSelectorInputs"
-        style={styles.carbsLabelGridValues}
-      >
-        Carbs%:
-      </label>
-      <MacroSelectorInput
-        nutritionHandler={nutritionHandler}
-        styling={styles.carbsInputComponentStyle}
-        id="carbs"
-      />
-
-      <label
-        htmlFor="fat"
-        className="macroSelectorInputs"
-        style={styles.fatLabelGridValues}
-      >
-        Fat%:
-      </label>
-      <MacroSelectorInput
-        nutritionHandler={nutritionHandler}
-        styling={styles.fatInputComponentStyle}
-        id="fat"
-      />
-
-      <Button style={styles.macroButton} onClick={macrosHandler}>
-        Calculate
-      </Button>
-    </div>
-  );
-};
-
-const styles = {
-  proteinLabelGridValues: {
-    gridColumn: "2/3",
-  },
-  carbsLabelGridValues: {
-    gridColumn: "4/5",
-  },
-  fatLabelGridValues: {
-    gridColumn: "6/7",
-  },
-  macroButton: {
-    gridColumn: "12/16",
-  },
-  proteinInputComponentStyle: {
-    width: "4em",
-    marginRight: "1em",
-  },
-  carbsInputComponentStyle: {
-    width: "4em",
-    marginRight: "1em",
-  },
-  fatInputComponentStyle: {
-    width: "4em",
-    marginRight: "-50px",
-  },
+    //center the inputs as otherwise weird looking on wider screen
+    <Form className="padding-bottom">
+      <div className="form-container">
+        <div className="form-group">
+          <label htmlFor="protein">{`Protein ${macro.protein}%:`}</label>
+          <MacroSelectorInput
+            id="protein"
+            nutritionHandler={nutritionHandler}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="carbs">{`Carbs ${macro.carbs}%:`}</label>
+          <MacroSelectorInput nutritionHandler={nutritionHandler} id="carbs" />
+        </div>
+        <div className="form-group" style={{ display: "inlineBlock" }}>
+          <label htmlFor="fat">{`Fat ${macro.fat}%:`}</label>
+          <MacroSelectorInput nutritionHandler={nutritionHandler} id="fat" />
+        </div>
+      </div>
+      <div className="calculate-button">
+        <Button type="submit" onClick={(e) => macrosHandler(e)}>
+          Calculate
+        </Button>
+      </div>
+    </Form>
+  ); // Button above - Enter on fat input clicks calculate button when pass in event + stop refresh + type is submit
 };
 
 export default MacroSelector;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Label } from "reactstrap";
+import { Button, Label, Input } from "reactstrap";
 import { toast } from "react-toastify";
 import MacroSelectorInput from "./MacroSelectorInput";
 
@@ -93,6 +93,31 @@ const MacroTester = (props) => {
       >
         Calculate
       </Button>
+
+      <div>
+        <label for="email">Email</label>
+        <Input id="email" type="text" value="" name="email">
+          {" "}
+        </Input>
+      </div>
+
+      <div>
+        <label for="subject">Subject</label>
+        <Input id="subject" type="text" value="" name="subject">
+          {" "}
+        </Input>
+      </div>
+
+      <div>
+        <label for="name">Name</label>
+        <MacroSelectorInput id="name" nutritionHandler={nutritionHandler} />
+      </div>
+      <div class="full">
+        <label for="message">Message</label>
+        <Input id="message" type="text" value="" name="message">
+          {" "}
+        </Input>
+      </div>
     </div>
   );
 };

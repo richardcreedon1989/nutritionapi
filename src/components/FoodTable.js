@@ -16,7 +16,7 @@ const FoodTable = (props) => {
 
   return (
     <div>
-      <Table className="table table-responsive-m" striped>
+      <Table className="table-responsive" striped>
         <thead>
           <tr>
             <th scope="col">#</th>

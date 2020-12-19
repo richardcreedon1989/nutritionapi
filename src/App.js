@@ -1,9 +1,9 @@
 //Make the Form be in the App component and the div in the Searcher component but still allow to submit from the Searcher component
-//CSS Grid is not responsive right now - look in to auto fit/fill
-//Continue styling calorie selector etc - give light grey background - add more icons perhaps?
 //Error handling for no search result - Modal pops up saying sorry?
-//remove grid from macroselector plus other styles to get responsive inputs
-
+//use media queries to build up for wider screens
+//div containing label and inputs isnt centered on wider screens-figure out how to centre the whole div
+//enter key on fat input no longer calculates - must press calculate with mouse - fix
+//margin between top of jumbotron and parent div gets too far as screen widens - make into class and change with media query
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -112,11 +112,11 @@ const App = (props) => {
             dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
             setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
           />
-          {/* <MacroSelector
+          <MacroSelector
             className="padding-bottom"
             macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-          /> */}
-          <MacroTester />
+          />
+          {/* <MacroTester /> */}
         </div>
 
         <div className="displayGrid">
@@ -127,14 +127,17 @@ const App = (props) => {
             />
           </div>
         </div>
-
-        <FoodTable
-          foodItemDetails={foodItemDetails} //Passing down the cals/grams/name etc to display in a row
-          sumOfFoodItems={sumOfFoodItems} //Passing down the total cals etc to display
-          removeRow={removeRow}
-          dailyCalorieSelector={dailyCalorieSelector} //Passing down total calories selected for diet to calculate remaining calories
-          remainingMacros={remainingMacros} // Passing down to dispaly remaing grams for each macro
-        />
+        {foodItemDetails.length > 0 ? (
+          <FoodTable
+            foodItemDetails={foodItemDetails} //Passing down the cals/grams/name etc to display in a row
+            sumOfFoodItems={sumOfFoodItems} //Passing down the total cals etc to display
+            removeRow={removeRow}
+            dailyCalorieSelector={dailyCalorieSelector} //Passing down total calories selected for diet to calculate remaining calories
+            remainingMacros={remainingMacros} // Passing down to dispaly remaing grams for each macro
+          />
+        ) : (
+          ""
+        )}
       </div>
     </Container>
   );

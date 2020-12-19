@@ -13,7 +13,10 @@ const Jumbo = (props) => {
     <div>
       <Jumbotron>
         <div style={{ marginTop: "-2em" }}>
-          <p className="text-center font-weight-light">
+          <p
+            className="text-center font-weight-light"
+            style={{ marginTop: "1em" }}
+          >
             The NutritionApi App will search for your food and display the
             macros and calories for that food, as well as deduct it from your
             daily allowance.
@@ -46,7 +49,7 @@ const Jumbo = (props) => {
             </span>
             When done, hit Calculate to work out the grams of each of the macros
           </p>
-          <p>
+          <p style={{ paddingBottom: "1.8em" }}>
             <span style={{ marginRight: "1em" }}>
               <FontAwesomeIcon icon={faAppleAlt} />
             </span>

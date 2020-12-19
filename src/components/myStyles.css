@@ -8,9 +8,28 @@
 }
 
 .padding-bottom {
-  padding-bottom: 2rem;
+  padding-bottom: 1em;
 }
 
+.form-container {
+  display: flex;
+  justify-content: flex-start;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+div label {
+  text-align: center;
+}
+
+.calculate-button {
+  text-align: center;
+  padding-top: 0.2em;
+}
 @media only screen and (min-width: 768px) {
 }
 /* .formStyle {
@@ -21,8 +40,6 @@
 } */
 
 .inputStuff {
-  width: 25%;
-  height: 70%;
 }
 
 .displayGrid {
@@ -39,11 +56,6 @@
     minmax(var(--auto-grid-min-size), 1fr)
   );
   grid-gap: 1rem;
-}
-
-.macroSelectorInputs {
-  line-height: 2.1;
-  margin-right: 10px;
 }
 
 .macroGridProteinName {
