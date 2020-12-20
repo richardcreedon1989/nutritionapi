@@ -19,12 +19,12 @@ const FoodTable = (props) => {
     }
   }; //table-responsive looks bad on larger than 760px so changing to different className for > than 760
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setWindowSize(window.screen.width);
-  //     window.addEventListener("resize", console.log("resized"));
-  //   };
-  // }, [window]);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.screen.width);
+      window.addEventListener("resize", console.log("resized"));
+    };
+  }, [window.screen.width]);
 
   const removeRow = (e) => {
     props.removeRow(e);

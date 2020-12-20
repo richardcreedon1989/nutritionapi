@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 990px) {
   .form-container {
     display: flex;
     justify-content: flex-start;
@@ -45,12 +45,34 @@
   }
 }
 
-/* .formStyle {
-  padding-top: 1em;
-  text-align: center;
-  margin: auto;
-  width: 80%;
-} */
+@media only screen and (min-width: 991px) {
+  .form-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .search-input {
+    margin: auto;
+    width: 90%;
+  }
+
+  div label {
+    text-align: center;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin: auto;
+  }
+  .calculate-button {
+    text-align: center;
+    margin-top: 1em;
+    /* padding-top: 1.5em;
+    padding-bottom: 1em; */
+  }
+}
 
 .displayGrid {
   box-sizing: border-box;

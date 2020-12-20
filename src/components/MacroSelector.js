@@ -23,7 +23,16 @@ const MacroSelector = (props) => {
     fat && protein && carbs && props.macrosHandler({ protein, carbs, fat });
     parseInt(carbs) + parseInt(protein) + parseInt(fat) !== 100 &&
       toast.error("Must add up to 100%");
+    // displayMacroGrams();
   }; //passes macros up to App component to allow for calculation for calories total/remaining etc
+
+  // const displayMacroGrams = (props) => {
+  //   if (props.remainingMacros.protein) {
+  //     return <div> cat </div>;
+  //   } else if (props.remainingMacros === undefined) {
+  //     return <div> bird </div>;
+  //   }
+  // };
 
   return (
     //center the inputs as otherwise weird looking on wider screen
@@ -50,6 +59,13 @@ const MacroSelector = (props) => {
           Calculate
         </Button>
       </div>
+      {/* {displayMacroGrams}
+      <div style={{ marginLeft: "10%" }}>
+        {`Total Protein: `}
+        {props.remainingMacros.carbs}
+      </div>
+      <div style={{ marginLeft: "10%" }}>{props.remainingMacros.fat}</div>
+      <div style={{ marginLeft: "10%" }}>{props.remainingMacros.protein}</div> */}
     </Form>
   ); // Button above - Enter on fat input clicks calculate button when pass in event + stop refresh + type is submit
 };

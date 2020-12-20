@@ -112,10 +112,13 @@ const App = (props) => {
             dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
             setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
           />
-          <MacroSelector
-            className="padding-bottom"
-            macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-          />
+          <div style={{ alignItems: "center" }}>
+            <MacroSelector
+              className="padding-bottom"
+              macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
+              remainingMacros={remainingMacros}
+            />
+          </div>
           {/* <MacroTester /> */}
         </div>
 
