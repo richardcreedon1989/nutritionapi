@@ -119,13 +119,11 @@ const App = (props) => {
           {/* <MacroTester /> */}
         </div>
 
-        <div className="displayGrid">
-          <div style={{ gridColumn: "3/21" }}>
-            <Searcher
-              className="padding-bottom"
-              onSearchSubmit={onSearchSubmit}
-            />
-          </div>
+        <div className="search-input">
+          <Searcher
+            className="padding-bottom"
+            onSearchSubmit={onSearchSubmit}
+          />
         </div>
         {foodItemDetails.length > 0 ? (
           <FoodTable

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
@@ -8,15 +8,32 @@ const FoodTable = (props) => {
   const { foodItemDetails, sumOfFoodItems } = props;
   const { fat, protein, carbs, calories } = sumOfFoodItems;
 
-  console.log("sumOfFoodItems ", props);
+  const [windowSize, setWindowSize] = useState();
+  console.log(window.screen.width, "window");
+
+  const windowClassName = () => {
+    if (window.screen.width < 760) {
+      return "table-responsive";
+    } else {
+      return "table";
+    }
+  }; //table-responsive looks bad on larger than 760px so changing to different className for > than 760
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setWindowSize(window.screen.width);
+  //     window.addEventListener("resize", console.log("resized"));
+  //   };
+  // }, [window]);
 
   const removeRow = (e) => {
     props.removeRow(e);
+    console.log(windowClassName);
   };
-
+  // className={windowClassName()}
   return (
     <div>
-      <Table className="table-responsive" striped>
+      <Table className={windowClassName()} striped>
         <thead>
           <tr>
             <th scope="col">#</th>

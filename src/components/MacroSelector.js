@@ -30,18 +30,18 @@ const MacroSelector = (props) => {
     <Form className="padding-bottom">
       <div className="form-container">
         <div className="form-group">
-          <label htmlFor="protein">{`Protein ${macro.protein}%:`}</label>
+          <label htmlFor="protein">Protein%:</label>
           <MacroSelectorInput
             id="protein"
             nutritionHandler={nutritionHandler}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="carbs">{`Carbs ${macro.carbs}%:`}</label>
+          <label htmlFor="carbs">Carbs%:</label>
           <MacroSelectorInput nutritionHandler={nutritionHandler} id="carbs" />
         </div>
         <div className="form-group" style={{ display: "inlineBlock" }}>
-          <label htmlFor="fat">{`Fat ${macro.fat}%:`}</label>
+          <label htmlFor="fat">Fat%: </label>
           <MacroSelectorInput nutritionHandler={nutritionHandler} id="fat" />
         </div>
       </div>
