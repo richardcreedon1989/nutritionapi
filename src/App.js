@@ -7,14 +7,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { Container, Label, Input } from "reactstrap";
+import { Container } from "reactstrap";
 
 import Searcher from "./components/Searcher";
 import MacroSelector from "./components/MacroSelector";
 import FoodTable from "./components/FoodTable";
 import Slider from "./components/Slider";
 import Jumbo from "./components/Jumbotron";
-import MacroTester from "./components/MacroTester";
 
 const App = (props) => {
   const [dailyCalorieSelector, setDailyCalorieSelector] = useState(1800); //Slider Bar Value
@@ -51,7 +50,6 @@ const App = (props) => {
     const proteinGrams = (dailyCalorieSelector * (protein / 100)) / 4;
     const carbGrams = (dailyCalorieSelector * (carbs / 100)) / 4;
     const fatGrams = (dailyCalorieSelector * (fat / 100)) / 9;
-
     setRemainingMacros({
       protein: proteinGrams,
       carbs: carbGrams,
@@ -116,7 +114,7 @@ const App = (props) => {
             <MacroSelector
               className="padding-bottom"
               macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-              remainingMacros={remainingMacros}
+              dailyCalorieSelector={dailyCalorieSelector}
             />
           </div>
           {/* <MacroTester /> */}

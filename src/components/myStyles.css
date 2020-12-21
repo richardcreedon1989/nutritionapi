@@ -38,11 +38,16 @@
     margin-right: 2%;
     margin-left: 2%;
   }
-  .calculate-button {
+  .calculate-button-div {
     text-align: center;
     /* padding-top: 1.5em;
     padding-bottom: 1em; */
   }
+
+  /* .calculate-button {
+    width: 40%;
+    height: 2.5em;
+  } */
 }
 
 @media only screen and (min-width: 991px) {
@@ -66,12 +71,16 @@
     margin-left: 2%;
     margin: auto;
   }
-  .calculate-button {
+  .calculate-button-div {
     text-align: center;
-    margin-top: 1em;
-    /* padding-top: 1.5em;
-    padding-bottom: 1em; */
+    margin-top: 3em;
+    margin-bottom: 2em;
   }
+  /* 
+  .calculate-button {
+    width: 16%;
+    height: 2.5em;
+  } */
 }
 
 .displayGrid {
