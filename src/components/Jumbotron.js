@@ -22,10 +22,10 @@ const Jumbo = (props) => {
             daily allowance.
           </p>
         </div>
-        <p className="text-center font-weight-light text-underline">
-          {" "}
+        <h5 className="text-center font-weight-light text-underline">
           <strong>Follow the 4 simple steps below! </strong>
-        </p>
+        </h5>
+
         <hr className="text-center" />
         <main className=" font-weight-light" style={{ marginBottom: "-3em" }}>
           <p style={{ marginTop: "2em" }}>

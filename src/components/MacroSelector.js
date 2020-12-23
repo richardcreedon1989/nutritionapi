@@ -5,6 +5,9 @@ import MacroSelectorInput from "./MacroSelectorInput";
 
 import "react-toastify/dist/ReactToastify.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDrumstickBite } from "@fortawesome/free-solid-svg-icons";
+
 toast.configure();
 
 const MacroSelector = (props) => {
@@ -44,25 +47,58 @@ const MacroSelector = (props) => {
     });
   }; //used to calculate the grams for each macro from the total daily calories selected x the macro's %
 
-  //when displaying macros as a percentage - could potentiall use icons like chicken/pizza/bacon
+  const displayProtein = (dailyMacroGrams) => {
+    return dailyMacroGrams ? (
+      <div className="total-macro-display">{dailyMacroGrams.protein} Grams</div>
+    ) : (
+      ""
+    );
+  };
+
+  const displayCarbs = (dailyMacroGrams) => {
+    return dailyMacroGrams ? (
+      <div className="total-macro-display">{dailyMacroGrams.carbs} Grams</div>
+    ) : (
+      ""
+    );
+  };
+
+  const displayFat = (dailyMacroGrams) => {
+    return dailyMacroGrams ? (
+      <div className="total-macro-display">{dailyMacroGrams.fat} Grams</div>
+    ) : (
+      ""
+    );
+  };
+
   return (
     <Form className="padding-bottom">
       <div className="form-container">
         <div className="form-group">
-          <label htmlFor="protein">Protein%:</label>
-          {dailyMacroGrams ? dailyMacroGrams.protein : ""}
+          <label htmlFor="protein">
+            <h6> Protein%: </h6>
+          </label>
           <MacroSelectorInput
             id="protein"
             nutritionHandler={nutritionHandler}
           />
+          {displayProtein(dailyMacroGrams)}
         </div>
         <div className="form-group">
-          <label htmlFor="carbs">Carbs%:</label>
+          <label htmlFor="carbs">
+            {" "}
+            <h6> Carbs%:</h6>
+          </label>
           <MacroSelectorInput nutritionHandler={nutritionHandler} id="carbs" />
+          {displayCarbs(dailyMacroGrams)}
         </div>
         <div className="form-group" style={{ display: "inlineBlock" }}>
-          <label htmlFor="fat">Fat%: </label>
+          <label htmlFor="fat">
+            {" "}
+            <h6> Fat%:</h6>
+          </label>
           <MacroSelectorInput nutritionHandler={nutritionHandler} id="fat" />
+          {displayFat(dailyMacroGrams)}
         </div>
       </div>
       <div className="calculate-button-div">

@@ -4,6 +4,8 @@
 //div containing label and inputs isnt centered on wider screens-figure out how to centre the whole div
 //enter key on fat input no longer calculates - must press calculate with mouse - fix
 //margin between top of jumbotron and parent div gets too far as screen widens - make into class and change with media query
+//in order to make it a more broad appearing app and more of a journey/experience, i need to make each of the components have some intro or fluff to make them bigger and the app longer. for example, instead of having just set calories and a slider, take half a length of a web page and make it a big piece JUST for selecting the calories. Lots of info, widgets, interaction, big background picture - make it sleek like the bi
+//sleek and minimalist -
 import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -110,7 +112,7 @@ const App = (props) => {
             dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
             setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
           />
-          <div style={{ alignItems: "center" }}>
+          <div className=" mt-3" style={{ alignItems: "center" }}>
             <MacroSelector
               className="padding-bottom"
               macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food

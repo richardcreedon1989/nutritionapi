@@ -44,6 +44,10 @@
     padding-bottom: 1em; */
   }
 
+  .total-macro-display {
+    margin-left: 0.7em;
+  }
+
   /* .calculate-button {
     width: 40%;
     height: 2.5em;
@@ -75,6 +79,14 @@
     text-align: center;
     margin-top: 3em;
     margin-bottom: 2em;
+  }
+
+  .total-macro-display {
+    margin-left: 0.7em;
+    margin-top: 0.7em;
+  }
+  .macro-selector-div {
+    margin-top: 200px !important;
   }
   /* 
   .calculate-button {

@@ -4,7 +4,10 @@ import { Label, Input } from "reactstrap";
 const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (
     <div className="padding-bottom text-center font-weight-light">
-      <Label for="volume">{`Select Daily Calorie Intake: ${dailyCalorieSelector}`}</Label>
+      <Label for="volume">
+        {" "}
+        <h5>{`Set Calories: ${dailyCalorieSelector}`}</h5>{" "}
+      </Label>
 
       <Input
         type="range"
