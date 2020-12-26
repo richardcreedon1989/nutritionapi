@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form } from "reactstrap";
 import { toast } from "react-toastify";
 import MacroSelectorInput from "./MacroSelectorInput";
+import macroImage from "../../src/images/macro-image.jpg";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -47,7 +48,7 @@ const MacroSelector = (props) => {
     });
   }; //used to calculate the grams for each macro from the total daily calories selected x the macro's %
 
-  const displayProtein = (dailyMacroGrams) => {
+  const displayProtein = () => {
     return dailyMacroGrams ? (
       <div className="total-macro-display">{dailyMacroGrams.protein} Grams</div>
     ) : (
@@ -55,7 +56,7 @@ const MacroSelector = (props) => {
     );
   };
 
-  const displayCarbs = (dailyMacroGrams) => {
+  const displayCarbs = () => {
     return dailyMacroGrams ? (
       <div className="total-macro-display">{dailyMacroGrams.carbs} Grams</div>
     ) : (
@@ -63,7 +64,7 @@ const MacroSelector = (props) => {
     );
   };
 
-  const displayFat = (dailyMacroGrams) => {
+  const displayFat = () => {
     return dailyMacroGrams ? (
       <div className="total-macro-display">{dailyMacroGrams.fat} Grams</div>
     ) : (
@@ -73,6 +74,8 @@ const MacroSelector = (props) => {
 
   return (
     <Form className="padding-bottom">
+      <h4>Calorie Setter</h4>
+      <hr />
       <div className="form-container">
         <div className="form-group">
           <label htmlFor="protein">
@@ -110,6 +113,7 @@ const MacroSelector = (props) => {
           Calculate
         </Button>
       </div>
+      <img src={macroImage} />
       {/* {displayMacroGrams}
       <div style={{ marginLeft: "10%" }}>
         {`Total Protein: `}

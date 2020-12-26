@@ -104,22 +104,21 @@ const App = (props) => {
   };
   return (
     <Container className="bg-light">
-      <h1 className="nav shadow p-4 mb-4 ">Nutrition API</h1>
+      <h1 className="nav shadow p-4 mb-4 rounded">Nutrition API</h1>
       <Jumbo />
-      <div className=" shadow p-4 mb-4">
-        <div>
-          <Slider
-            dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
-            setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
+      <div className="shadow bg-light  mb-4 rounded">
+        <Slider
+          dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
+          setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
+        />
+      </div>
+      <div className=" shadow rounded p-4 mb-4">
+        <div className=" mt-3" style={{ alignItems: "center" }}>
+          <MacroSelector
+            className="padding-bottom"
+            macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
+            dailyCalorieSelector={dailyCalorieSelector}
           />
-          <div className=" mt-3" style={{ alignItems: "center" }}>
-            <MacroSelector
-              className="padding-bottom"
-              macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-              dailyCalorieSelector={dailyCalorieSelector}
-            />
-          </div>
-          {/* <MacroTester /> */}
         </div>
 
         <div className="search-input">

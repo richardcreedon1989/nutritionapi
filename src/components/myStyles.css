@@ -7,15 +7,66 @@
   justify-content: center;
 }
 
+body {
+  font-family: roboto;
+  color: #444444;
+}
+
+.calorie-setter-parent-div {
+  background-color: #e9ecef;
+}
+
+.calorie-slider-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
 .padding-bottom {
   padding-bottom: 1em;
 }
 
-.margin-auto {
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  width: 70%;
+  margin: auto;
+  border-radius: 50px;
+  display: inline;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  background: #444444; /* Green background */
+  border-radius: 50px;
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: blue; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+a {
+  color: black;
 }
 
 ::-webkit-input-placeholder {
   text-align: center;
+}
+
+strong {
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 990px) {
@@ -40,24 +91,26 @@
   }
   .calculate-button-div {
     text-align: center;
-    /* padding-top: 1.5em;
-    padding-bottom: 1em; */
   }
 
   .total-macro-display {
     margin-left: 0.7em;
   }
-
-  /* .calculate-button {
-    width: 40%;
-    height: 2.5em;
-  } */
 }
 
 @media only screen and (min-width: 991px) {
   .form-container {
     display: flex;
     justify-content: flex-start;
+  }
+  .calorie-setter-div {
+    float: left;
+    width: 40%;
+    margin: 3em;
+  }
+
+  .inline-display {
+    margin-left: 50%;
   }
 
   .search-input {
@@ -88,6 +141,7 @@
   .macro-selector-div {
     margin-top: 200px !important;
   }
+
   /* 
   .calculate-button {
     width: 16%;
