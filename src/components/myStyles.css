@@ -12,8 +12,20 @@ body {
   color: #444444;
 }
 
+.macro-selector-heading {
+  text-align: center;
+}
+
 .calorie-setter-parent-div {
   background-color: #e9ecef;
+}
+
+.macro-setter-parent-div {
+  background-color: #e9ecef;
+}
+
+.form-control {
+  background: #d3d3d3;
 }
 
 .calorie-slider-image {
@@ -21,6 +33,14 @@ body {
   height: auto;
   max-width: 100%;
   max-height: 100%;
+}
+
+.macro-setter-image {
+  width: 1300px;
+  height: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
 }
 .padding-bottom {
   padding-bottom: 1em;
@@ -108,7 +128,9 @@ strong {
     width: 40%;
     margin: 3em;
   }
-
+  .calculate-button {
+    margin-bottom: 2em;
+  }
   .inline-display {
     margin-left: 50%;
   }
@@ -138,15 +160,10 @@ strong {
     margin-left: 0.7em;
     margin-top: 0.7em;
   }
-  .macro-selector-div {
-    margin-top: 200px !important;
-  }
 
-  /* 
-  .calculate-button {
-    width: 16%;
-    height: 2.5em;
-  } */
+  .macro-selector-div {
+    background: red;
+  }
 }
 
 .displayGrid {

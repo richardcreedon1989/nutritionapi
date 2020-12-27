@@ -72,16 +72,20 @@ const MacroSelector = (props) => {
     );
   };
 
+  //float text to left and have the inputs float right above each other ie the inputs would replace the image above - or perhaps inputs would be on left - maybe have background image behind it with inputs on top
   return (
-    <Form className="padding-bottom">
-      <h4>Calorie Setter</h4>
+    <Form style={{ textAlign: "center" }} className=" macro-setter-parent-div ">
+      <h4 className="macro-selector-heading">Macro-nutrient Profile</h4>
       <hr />
-      <div className="form-container">
+      {/* <div style={{ float: "left" }}> </div> */}
+
+      <div className="form-container ">
         <div className="form-group">
           <label htmlFor="protein">
             <h6> Protein%: </h6>
           </label>
           <MacroSelectorInput
+            classname="input-style"
             id="protein"
             nutritionHandler={nutritionHandler}
           />
@@ -113,7 +117,7 @@ const MacroSelector = (props) => {
           Calculate
         </Button>
       </div>
-      <img src={macroImage} />
+      <img className="macro-setter-image" src={macroImage} />
       {/* {displayMacroGrams}
       <div style={{ marginLeft: "10%" }}>
         {`Total Protein: `}
