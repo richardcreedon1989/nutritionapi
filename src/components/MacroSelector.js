@@ -72,60 +72,77 @@ const MacroSelector = (props) => {
     );
   };
 
-  //float text to left and have the inputs float right above each other ie the inputs would replace the image above - or perhaps inputs would be on left - maybe have background image behind it with inputs on top
   return (
-    <Form style={{ textAlign: "center" }} className=" macro-setter-parent-div ">
+    <div style={{ textAlign: "center" }} className=" macro-setter-parent-div ">
       <h4 className="macro-selector-heading">Macro-nutrient Profile</h4>
       <hr />
-      {/* <div style={{ float: "left" }}> </div> */}
+      <Form className="form-container">
+        <div style={{ display: "inline", width: "50%", float: "left" }}>
+          <div className="form-group">
+            <label className="input-label" htmlFor="protein">
+              <h6> Protein%: </h6>
+            </label>
+            <MacroSelectorInput
+              className="macro-input"
+              id="protein"
+              nutritionHandler={nutritionHandler}
+            />
+            <div className="total-macro-display">
+              {" "}
+              {displayProtein(dailyMacroGrams)}{" "}
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="input-label" htmlFor="carbs">
+              <h6> Carbs%:</h6>
+            </label>
+            <MacroSelectorInput
+              className="macro-input"
+              nutritionHandler={nutritionHandler}
+              id="carbs"
+            />
+            <div className="total-macro-display">
+              {displayCarbs(dailyMacroGrams)}
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="input-label" htmlFor="fat">
+              <h6> Fat%:</h6>
+            </label>
+            <MacroSelectorInput
+              className="macro-input"
+              nutritionHandler={nutritionHandler}
+              id="fat"
+            />
+            <div className="total-macro-display">
+              {displayFat(dailyMacroGrams)}
+            </div>
+          </div>
+        </div>
 
-      <div className="form-container ">
-        <div className="form-group">
-          <label htmlFor="protein">
-            <h6> Protein%: </h6>
-          </label>
-          <MacroSelectorInput
-            classname="input-style"
-            id="protein"
-            nutritionHandler={nutritionHandler}
-          />
-          {displayProtein(dailyMacroGrams)}
-        </div>
-        <div className="form-group">
-          <label htmlFor="carbs">
-            {" "}
-            <h6> Carbs%:</h6>
-          </label>
-          <MacroSelectorInput nutritionHandler={nutritionHandler} id="carbs" />
-          {displayCarbs(dailyMacroGrams)}
-        </div>
-        <div className="form-group" style={{ display: "inlineBlock" }}>
-          <label htmlFor="fat">
-            {" "}
-            <h6> Fat%:</h6>
-          </label>
-          <MacroSelectorInput nutritionHandler={nutritionHandler} id="fat" />
-          {displayFat(dailyMacroGrams)}
-        </div>
-      </div>
-      <div className="calculate-button-div">
         <Button
+          style={{
+            marginTop: "3.75em",
+            display: "inline",
+            width: "40%",
+          }}
           className="calculate-button"
+          id="button"
           type="submit"
           onClick={(e) => macrosHandler(e)}
         >
           Calculate
         </Button>
+      </Form>
+
+      <div style={{ float: "none", clear: "both" }}>
+        <p> lorem ipsum </p>
+        <p> lorem ipsum </p>
+        <p> lorem ipsum </p>
+        <p> lorem ipsum </p>
       </div>
-      <img className="macro-setter-image" src={macroImage} />
-      {/* {displayMacroGrams}
-      <div style={{ marginLeft: "10%" }}>
-        {`Total Protein: `}
-        {props.remainingMacros.carbs}
-      </div>
-      <div style={{ marginLeft: "10%" }}>{props.remainingMacros.fat}</div>
-      <div style={{ marginLeft: "10%" }}>{props.remainingMacros.protein}</div> */}
-    </Form>
+      {/* <img className="macro-setter-image" src={macroImage} /> */}
+    </div>
   ); // Button above - Enter on fat input clicks calculate button when pass in event + stop refresh + type is submit
 };
 
