@@ -87,6 +87,10 @@ strong {
   font-weight: bold;
 }
 
+::marker {
+  color: red;
+}
+
 @media only screen and (max-width: 990px) {
   .form-container {
     margin-top: 2em;
@@ -111,6 +115,17 @@ strong {
     margin-left: 0.2em;
   }
 
+  li {
+    margin: 1em;
+  }
+
+  ul {
+    columns: 2;
+    float: left;
+    justify-content: left;
+    padding: 0;
+  }
+
   .macro-input {
     width: 70%;
   }
@@ -122,11 +137,14 @@ strong {
   .calculate-button {
     margin: auto;
     width: 30%;
+    clear: right;
   }
 
   .total-macro-display {
     margin-left: 0.1em;
     margin-top: 0.2em;
+    clear: both;
+    justify-content: left;
   }
 }
 
