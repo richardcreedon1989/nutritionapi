@@ -52,10 +52,11 @@ body {
   opacity: 0.7;
   -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
   transition: opacity 0.2s;
-  width: 70%;
+  width: 60%;
   margin: auto;
   border-radius: 50px;
   display: inline;
+  text-align: center;
 }
 
 .slider::-webkit-slider-thumb {
@@ -91,6 +92,17 @@ strong {
   color: red;
 }
 
+.hr-inputs {
+  width: 50%;
+  overflow: hidden;
+}
+
+.slider-heading {
+  text-align: center;
+  padding-top: 1em;
+  font-weight: bolder !important;
+}
+
 @media only screen and (max-width: 990px) {
   .form-container {
     margin-top: 2em;
@@ -99,6 +111,12 @@ strong {
   .macro-selector-heading {
     margin-top: 1em;
     text-align: center;
+    font-weight: bolder;
+  }
+
+  .calorie-setter-div {
+    text-align: justify;
+    margin-bottom: 1em;
   }
 
   .search-input {
@@ -124,6 +142,7 @@ strong {
     float: left;
     justify-content: left;
     padding: 0;
+    margin-top: -1.5em;
   }
 
   .macro-input {
@@ -160,6 +179,8 @@ strong {
     float: left;
     width: 40%;
     margin: 3em;
+    text-align: justify;
+    display: "inline";
   }
   .calculate-button {
     margin-bottom: 2em;

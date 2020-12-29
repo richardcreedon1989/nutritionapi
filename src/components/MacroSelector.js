@@ -51,6 +51,9 @@ const MacroSelector = (props) => {
   const displayMacroGrams = () => {
     return dailyMacroGrams ? (
       <div>
+        <h6 className="total-macro-display">
+          <strong> Daily Macro Allowance</strong>
+        </h6>
         <p className="total-macro-display">
           {`Your daily allowance of protein is ${dailyMacroGrams.protein}g. Healthy sources of protein include fish, grains, and chicken.`}
         </p>
@@ -68,7 +71,7 @@ const MacroSelector = (props) => {
 
   return (
     <div style={{ textAlign: "center" }} className=" macro-setter-parent-div ">
-      <h4 className="macro-selector-heading">Macro-nutrient Profile</h4>
+      <h4 className="macro-selector-heading">Macronutrient Calculator</h4>
       <hr />
       <div style={{ textAlign: "left", marginLeft: "1em" }}>
         <p>
@@ -76,19 +79,25 @@ const MacroSelector = (props) => {
           Macronutrients are the nutrients we need in larger quantities that
           provide us with energy.
         </p>
-        <p>
-          There are seven major classes of nutrients:
-          <ul>
-            <li> Carbohydrates </li>
-            <li> Dietary Fiber </li>
-            <li> Fats </li>
-            <li> Minerals </li>
-            <li> Proteins </li>
-            <li> Vitamins </li>
-            <li> Water </li>
-          </ul>
-        </p>
+        <p>There are seven major classes of nutrients:</p>
+        <ul>
+          <li> Carbohydrates </li>
+          <li> Dietary Fiber </li>
+          <li> Fats </li>
+          <li> Minerals </li>
+          <li style={{ paddingTop: "1em" }}> Proteins </li>
+          <li> Vitamins </li>
+          <li> Water </li>
+        </ul>
       </div>
+      <hr className="hr-inputs" />
+      <p style={{ textAlign: "center", paddingTop: "1em" }}>
+        Input the percentage of your diet that you want to be made up of
+        protein, carbohydrates, and fat.
+      </p>
+      <p style={{ textAlign: "center", paddingTop: "1em" }}>
+        Hit Enter to see how many grams of each you should be consuming per day!
+      </p>
       <Form className="form-container">
         <div style={{ display: "inline", width: "50%", float: "left" }}>
           <div className="form-group">
@@ -140,7 +149,6 @@ const MacroSelector = (props) => {
 
         {displayMacroGrams(dailyMacroGrams)}
       </Form>
-
       {/* <img className="macro-setter-image" src={macroImage} /> */}
     </div>
   ); // Button above - Enter on fat input clicks calculate button when pass in event + stop refresh + type is submit

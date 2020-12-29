@@ -5,8 +5,12 @@ import calorieSelectorImage from "../../src/images/selector-image.jpg";
 const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (
     <div className="calorie-setter-parent-div text-center font-weight-light">
-      <div style={{ textAlign: "justify" }} className="calorie-setter-div">
-        <h4>Calorie Setter</h4>
+      <div className="calorie-setter-div">
+        <h4
+          style={{ textAlign: "center", paddingTop: "1em", fontWeight: "bold" }}
+        >
+          Calorie Setter
+        </h4>
         <hr />
 
         <p>
@@ -18,15 +22,18 @@ const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
           composition. To work out your TDEE click
           <a href="https://tdeecalculator.net/"> here</a>{" "}
         </p>
-        <p>
+        <hr className="hr-inputs" />
+        <p style={{ textAlign: "center", paddingTop: "1em" }}>
           Use the slider to increase/decrease the amount of calories you wish to
           consume per day
         </p>
 
-        <Label for="volume" style={{ marginBottom: "2em" }}></Label>
+        <Label
+          for="volume"
+          style={{ marginLeft: "1em", marginRight: "1em" }}
+        ></Label>
 
         <input
-          style={{ textAlign: "center !important" }}
           className="slider"
           type="range"
           id="volume"
