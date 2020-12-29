@@ -56,7 +56,6 @@ body {
   margin: auto;
   border-radius: 50px;
   display: inline;
-  text-align: center;
 }
 
 .slider::-webkit-slider-thumb {
@@ -106,6 +105,12 @@ strong {
 @media only screen and (max-width: 990px) {
   .form-container {
     margin-top: 2em;
+  }
+
+  .calorie-setter-heading {
+    text-align: center;
+    padding-top: 1em;
+    font-weight: bold;
   }
 
   .macro-selector-heading {
@@ -167,27 +172,110 @@ strong {
   }
 }
 
-@media only screen and (min-width: 991px) {
+@media only screen and (min-width: 991px) and (max-width: 1200px) {
   .form-container {
     width: 70%;
     float: left;
   }
   .macro-selector-heading {
+    padding-top: 1em;
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  .calorie-setter-div {
+    position: absolute;
+    width: 40%;
+    margin: 2em 1em;
+    text-align: justify;
+  }
+
+  .calorie-setter-heading {
+    text-align: center;
+    margin-top: -1em;
+    font-weight: bold;
+  }
+  .calculate-button {
+    margin-bottom: 2em;
+  }
+  .image-div {
+    margin-left: 50%;
+    padding-left: 1.7em;
+  }
+
+  /* *,
+  ::after,
+  ::before {
+    box-sizing: unset !important ;
+  } */
+
+  .search-input {
+    margin: auto;
+    width: 90%;
+  }
+
+  div label {
     text-align: center;
   }
+  .form-group {
+    /* display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin: auto; */
+  }
+  .calculate-button-div {
+    text-align: center;
+    margin-top: 3em;
+    margin-bottom: 2em;
+  }
+
+  .total-macro-display {
+    margin-left: 0.7em;
+    margin-top: 0.7em;
+  }
+
+  .macro-selector-div {
+    background: red;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .form-container {
+    width: 70%;
+    float: left;
+  }
+  .macro-selector-heading {
+    padding-top: 1em;
+    text-align: center;
+    font-weight: bolder;
+  }
+
   .calorie-setter-div {
     float: left;
     width: 40%;
     margin: 3em;
     text-align: justify;
-    display: "inline";
+    display: inline;
+  }
+
+  .calorie-setter-heading {
+    text-align: center;
+    margin-top: -1em;
+    font-weight: bold;
   }
   .calculate-button {
     margin-bottom: 2em;
   }
-  .inline-display {
+  .image-div {
     margin-left: 50%;
   }
+
+  /* *,
+  ::after,
+  ::before {
+    box-sizing: unset !important ;
+  } */
 
   .search-input {
     margin: auto;
