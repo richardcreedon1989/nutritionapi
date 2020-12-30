@@ -1,10 +1,10 @@
 import React from "react";
 import { Label, Input } from "reactstrap";
 import calorieSelectorImage from "../../src/images/selector-image.jpg";
-
+import "./slider.css";
 const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
   return (
-    <div className="calorie-setter-parent-div text-center font-weight-light">
+    <div className="slider-container text-center font-weight-light">
       <div className="calorie-setter-div">
         <h4 className="calorie-setter-heading">Calorie Setter</h4>
         <hr className="calorie-setter-hr" />

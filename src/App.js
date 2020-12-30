@@ -112,14 +112,15 @@ const App = (props) => {
           setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
         />
       </div>
-      <div className="shadow rounded mb-4">
-        <div className="  mt-3" style={{ alignItems: "center" }}>
-          <MacroSelector
-            className="padding-bottom "
-            macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
-            dailyCalorieSelector={dailyCalorieSelector}
-          />
-        </div>
+      <div
+        className="shadow rounded mb-4 mt-3"
+        style={{ alignItems: "center" }}
+      >
+        <MacroSelector
+          className="padding-bottom "
+          macrosHandler={macrosHandler} //Receive the % for each macro to be used to calculate calories for each macro food
+          dailyCalorieSelector={dailyCalorieSelector}
+        />
       </div>
 
       <div className="shadow rounded mb-4 ">

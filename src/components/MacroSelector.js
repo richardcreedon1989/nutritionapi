@@ -67,7 +67,7 @@ const MacroSelector = (props) => {
   };
 
   return (
-    <div className=" macro-setter-parent-div ">
+    <div className=" MacroSelector-container ">
       <h4 className="macro-selector-heading">Macronutrient Calculator</h4>
       <hr className="macro-selector-hr" />
       <div className="macro-selector-info-div">
@@ -87,6 +87,7 @@ const MacroSelector = (props) => {
         </ul>
       </div>
       <hr className="hr-inputs" />
+
       <Form className="form-container">
         <p className="macro-selector-p-tag">
           Input the percentage of your diet that you want to be made up of

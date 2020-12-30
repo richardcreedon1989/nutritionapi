@@ -7,13 +7,13 @@
   justify-content: center;
 }
 
+.slider-container {
+  background-color: #e9ecef;
+  overflow: auto;
+}
 body {
   font-family: roboto;
   color: #444444;
-}
-
-.calorie-setter-parent-div {
-  background-color: #e9ecef;
 }
 
 .form-control {
