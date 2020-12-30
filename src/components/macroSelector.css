@@ -1,0 +1,154 @@
+.macro-selector-hr {
+  width: 90%;
+}
+
+@media only screen and (max-width: 768px) {
+  .total-macro-display {
+    margin-left: 0.1em;
+    margin-top: 0.2em;
+    clear: both;
+    justify-content: left;
+  }
+
+  .macro-setter-parent-div {
+    background-color: #e9ecef;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .macro-selector-info-div {
+    text-align: left;
+    margin-left: 1em;
+  }
+
+  .macro-selector-p-tag {
+    text-align: center;
+    padding-top: 1em;
+  }
+
+  .form-group-container {
+    display: inline;
+    width: 50%;
+    float: left;
+  }
+
+  .hr-inputs {
+    width: 50%;
+    overflow: hidden;
+  }
+
+  .form-container {
+    margin-top: -1em;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .input-label {
+    width: 40%;
+    clear: left;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 0.5em;
+    margin-right: 1em;
+    margin-left: 0.2em;
+  }
+
+  .macro-input {
+    width: 70%;
+  }
+
+  li {
+    margin: 1em;
+  }
+
+  ul {
+    columns: 2;
+    float: left;
+    justify-content: left;
+    padding: 0;
+    margin-top: -1.5em;
+  }
+
+  .calculate-button {
+    margin: auto;
+    width: 32%;
+    clear: right;
+    height: 3em;
+    display: inline;
+    margin-top: 3.5em;
+  }
+
+  .hr-macro-display {
+    clear: both;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .macro-setter-parent-div {
+    background-color: #e9ecef;
+    overflow: auto;
+  }
+
+  .macro-selector-info-div {
+    width: 50%;
+    float: left;
+    padding: 0 1em;
+  }
+  li {
+    margin: 1em;
+  }
+
+  ul {
+    columns: 2;
+    float: left;
+    justify-content: left;
+    padding: 0;
+    margin-top: -1.5em;
+  }
+  /*Above is left hand side of screen - Below is right hand side */
+
+  .form-container {
+    width: 50%;
+    float: right;
+    padding: 0 1em;
+  }
+
+  .form-group {
+    width: 30%;
+    display: inline-grid;
+    margin-left: 0.5em;
+  }
+  .input-label {
+    display: inline;
+    text-align: left;
+  }
+
+  /* .macro-input {
+    width: 30%;
+  } */
+
+  .hr-inputs {
+    display: none;
+    width: 50%;
+    overflow: hidden;
+  }
+  .btn {
+    margin-left: 30%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .total-macro-display {
+    text-align: center;
+    margin: 1em;
+    clear: both;
+  }
+
+  .hr-macro-display {
+    clear: both;
+    width: 50%;
+  }
+}

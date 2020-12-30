@@ -7,7 +7,7 @@ const Sliders = ({ dailyCalorieSelector, setCalorieHandler }) => {
     <div className="calorie-setter-parent-div text-center font-weight-light">
       <div className="calorie-setter-div">
         <h4 className="calorie-setter-heading">Calorie Setter</h4>
-        <hr />
+        <hr className="calorie-setter-hr" />
         <div
           style={{
             textAlign: "center",

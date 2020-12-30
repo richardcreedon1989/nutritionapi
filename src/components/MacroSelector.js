@@ -5,10 +5,9 @@ import MacroSelectorInput from "./MacroSelectorInput";
 import macroImage from "../../src/images/macro-image.jpg";
 
 import "react-toastify/dist/ReactToastify.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDrumstickBite } from "@fortawesome/free-solid-svg-icons";
-
+import "./macroSelector.css";
 toast.configure();
 
 const MacroSelector = (props) => {
@@ -19,8 +18,6 @@ const MacroSelector = (props) => {
   const nutritionHandler = (e, id) => {
     setMacro({ ...macro, [id]: [e] });
   }; //sets % user wants for each of the macros
-
-  console.log("macroProps", props);
 
   const macrosHandler = (e) => {
     e.preventDefault();
@@ -33,8 +30,7 @@ const MacroSelector = (props) => {
 
   useEffect(() => {
     setDailyCalories(props.dailyCalorieSelector);
-    console.log("usefefect");
-  }, [props]);
+  }, [props]); //need to access slider calories amount in this component - without useffect = undefined as loading calorie slider before state was set
 
   const macroGramsSetter = (props) => {
     const { protein, fat, carbs } = macro;
@@ -51,6 +47,7 @@ const MacroSelector = (props) => {
   const displayMacroGrams = () => {
     return dailyMacroGrams ? (
       <div>
+        <hr className="hr-macro-display" />
         <h6 className="total-macro-display">
           <strong> Daily Macro Allowance</strong>
         </h6>
@@ -70,12 +67,11 @@ const MacroSelector = (props) => {
   };
 
   return (
-    <div style={{ textAlign: "center" }} className=" macro-setter-parent-div ">
+    <div className=" macro-setter-parent-div ">
       <h4 className="macro-selector-heading">Macronutrient Calculator</h4>
-      <hr />
-      <div style={{ textAlign: "left", marginLeft: "1em" }}>
+      <hr className="macro-selector-hr" />
+      <div className="macro-selector-info-div">
         <p>
-          {" "}
           Macronutrients are the nutrients we need in larger quantities that
           provide us with energy.
         </p>
@@ -91,15 +87,17 @@ const MacroSelector = (props) => {
         </ul>
       </div>
       <hr className="hr-inputs" />
-      <p style={{ textAlign: "center", paddingTop: "1em" }}>
-        Input the percentage of your diet that you want to be made up of
-        protein, carbohydrates, and fat.
-      </p>
-      <p style={{ textAlign: "center", paddingTop: "1em" }}>
-        Hit Enter to see how many grams of each you should be consuming per day!
-      </p>
       <Form className="form-container">
-        <div style={{ display: "inline", width: "50%", float: "left" }}>
+        <p className="macro-selector-p-tag">
+          Input the percentage of your diet that you want to be made up of
+          protein, carbohydrates, and fat.
+        </p>
+        <p className="macro-selector-p-tag">
+          Hit Enter to see how many grams of each you should be consuming per
+          day!
+        </p>
+
+        <div className="form-group-container">
           <div className="form-group">
             <label className="input-label" htmlFor="protein">
               <h6> Protein%: </h6>
@@ -133,12 +131,6 @@ const MacroSelector = (props) => {
         </div>
 
         <Button
-          style={{
-            marginTop: "3.5em",
-            display: "inline",
-            width: "40%",
-            height: "3em",
-          }}
           className="calculate-button"
           id="button"
           type="submit"
@@ -146,10 +138,9 @@ const MacroSelector = (props) => {
         >
           Calculate
         </Button>
-
-        {displayMacroGrams(dailyMacroGrams)}
       </Form>
-      {/* <img className="macro-setter-image" src={macroImage} /> */}
+
+      {displayMacroGrams(dailyMacroGrams)}
     </div>
   ); // Button above - Enter on fat input clicks calculate button when pass in event + stop refresh + type is submit
 };

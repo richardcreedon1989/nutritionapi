@@ -16,14 +16,13 @@ body {
   background-color: #e9ecef;
 }
 
-.macro-setter-parent-div {
-  background-color: #e9ecef;
-  overflow: auto;
-}
-
 .form-control {
   background: #d3d3d3;
   width: 30%;
+}
+
+.calorie-setter-hr {
+  width: 90%;
 }
 
 .calorie-slider-image {
@@ -91,11 +90,6 @@ strong {
   color: red;
 }
 
-.hr-inputs {
-  width: 50%;
-  overflow: hidden;
-}
-
 .slider-heading {
   text-align: center;
   padding-top: 1em;
@@ -103,10 +97,6 @@ strong {
 }
 
 @media only screen and (max-width: 990px) {
-  .form-container {
-    margin-top: 2em;
-  }
-
   .calorie-setter-heading {
     text-align: center;
     padding-top: 1em;
@@ -128,55 +118,9 @@ strong {
     margin: auto;
     width: 90%;
   }
-  .input-label {
-    width: 40%;
-    clear: left;
-    text-align: right;
-    padding-right: 10px;
-    margin-top: 0.5em;
-    margin-right: 1em;
-    margin-left: 0.2em;
-  }
-
-  li {
-    margin: 1em;
-  }
-
-  ul {
-    columns: 2;
-    float: left;
-    justify-content: left;
-    padding: 0;
-    margin-top: -1.5em;
-  }
-
-  .macro-input {
-    width: 70%;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: row;
-  }
-  .calculate-button {
-    margin: auto;
-    width: 30%;
-    clear: right;
-  }
-
-  .total-macro-display {
-    margin-left: 0.1em;
-    margin-top: 0.2em;
-    clear: both;
-    justify-content: left;
-  }
 }
 
 @media only screen and (min-width: 991px) and (max-width: 1200px) {
-  .form-container {
-    width: 70%;
-    float: left;
-  }
   .macro-selector-heading {
     padding-top: 1em;
     text-align: center;
@@ -224,16 +168,11 @@ strong {
     margin-left: 2%;
     margin: auto; */
   }
-  .calculate-button-div {
+  /* .calculate-button-div {
     text-align: center;
     margin-top: 3em;
     margin-bottom: 2em;
-  }
-
-  .total-macro-display {
-    margin-left: 0.7em;
-    margin-top: 0.7em;
-  }
+  } */
 
   .macro-selector-div {
     background: red;
@@ -292,11 +231,11 @@ strong {
     margin-left: 2%;
     margin: auto; */
   }
-  .calculate-button-div {
+  /* .calculate-button-div {
     text-align: center;
     margin-top: 3em;
     margin-bottom: 2em;
-  }
+  } */
 
   .total-macro-display {
     margin-left: 0.7em;
