@@ -1,0 +1,19 @@
+.form-control {
+  width: 50%;
+  margin: auto;
+}
+
+.macro-selector-heading {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.macro-selector-hr {
+  margin: 1em 3em;
+}
+
+.hr-inputs {
+  width: 50%;
+  overflow: hidden;
+}

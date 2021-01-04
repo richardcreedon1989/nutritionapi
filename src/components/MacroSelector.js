@@ -38,9 +38,9 @@ const MacroSelector = (props) => {
     const carbGrams = (dailyCalories * (carbs / 100)) / 4;
     const fatGrams = (dailyCalories * (fat / 100)) / 9;
     setDailyMacroGrams({
-      protein: proteinGrams,
-      carbs: carbGrams,
-      fat: fatGrams,
+      protein: proteinGrams.toFixed(0),
+      carbs: carbGrams.toFixed(0),
+      fat: fatGrams.toFixed(0),
     });
   }; //used to calculate the grams for each macro from the total daily calories selected x the macro's %
 

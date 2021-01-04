@@ -106,14 +106,14 @@ const App = (props) => {
     <Container className="bg-light">
       <h1 className="nav shadow p-4 mb-4 rounded">Nutrition API</h1>
       <Jumbo />
-      <div className="shadow bg-light  mb-4 rounded">
+      <div className="shadow bg-light mb-4 rounded slider-container">
         <Slider
           dailyCalorieSelector={dailyCalorieSelector} //Passing down value to display calories selected
           setCalorieHandler={setCalorieHandler} //Setting Calories required from Slider
         />
       </div>
       <div
-        className="shadow rounded mb-4 mt-3"
+        className="shadow rounded mb-4 mt-3 slider-container"
         style={{ alignItems: "center" }}
       >
         <MacroSelector
@@ -123,7 +123,7 @@ const App = (props) => {
         />
       </div>
 
-      <div className="shadow rounded mb-4 ">
+      <div className="slider-container shadow rounded mb-4 ">
         <Searcher className="padding-bottom" onSearchSubmit={onSearchSubmit} />
         {foodItemDetails.length > 0 ? (
           <FoodTable
