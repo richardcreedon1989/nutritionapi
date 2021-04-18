@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
-import { BsFillPlusCircleFill } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 
 //Make the table row a different component https://stackoverflow.com/questions/40044861/get-key-index-on-click-es6-react
 
@@ -57,9 +57,7 @@ const FoodTable = (props) => {
                   <td>{foodItem.protein} g</td>
                   <td>{foodItem.calories} kCal </td>
                   <td>
-                    <BsFillPlusCircleFill
-                      onClick={() => removeRow(foodItem)}
-                    ></BsFillPlusCircleFill>
+                    <BsTrash onClick={() => removeRow(foodItem)}></BsTrash>
                   </td>
                 </tr>
               );

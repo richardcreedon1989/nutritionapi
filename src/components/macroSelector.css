@@ -87,7 +87,7 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) and (max-width: 998px) {
   .MacroSelector-container {
     background-color: #e9ecef;
     overflow: auto;
@@ -134,6 +134,152 @@
   .input-label {
     display: inline;
     text-align: left;
+    margin-left: 12px;
+  }
+
+  .hr-inputs {
+    display: none;
+    width: 50%;
+    overflow: hidden;
+  }
+  .btn {
+    margin-left: 37%;
+
+    margin-top: 0.4em;
+    margin-bottom: 1em;
+  }
+  .total-macro-display {
+    text-align: center;
+    margin: 1em;
+    clear: both;
+  }
+
+  .hr-macro-display {
+    clear: both;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 998px) and (max-width: 1200px) {
+  .MacroSelector-container {
+    background-color: #e9ecef;
+    overflow: auto;
+  }
+
+  .macro-selector-info-div {
+    width: 50%;
+    float: left;
+    padding: 0 1em;
+  }
+
+  .macro-selector-hr {
+    margin: 1em 3em;
+  }
+  li {
+    margin: 1em;
+  }
+
+  ul {
+    columns: 2;
+    float: left;
+    justify-content: left;
+    padding: 0;
+    margin-top: -1.5em;
+  }
+
+  .form-container {
+    width: 50%;
+    float: right;
+    padding: 0 1em;
+  }
+  .form-group-container {
+    margin-left: 2em;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .form-group {
+    width: 30%;
+    display: inline-grid;
+    margin-left: 0.5em;
+  }
+  .input-label {
+    display: inline;
+    text-align: left;
+    margin-left: 30px;
+  }
+
+  .hr-inputs {
+    display: none;
+    width: 50%;
+    overflow: hidden;
+  }
+  .btn {
+    margin-left: 43%;
+
+    margin-top: 0.4em;
+    margin-bottom: 1em;
+  }
+  .total-macro-display {
+    text-align: center;
+    margin: 1em;
+    clear: both;
+  }
+
+  .hr-macro-display {
+    clear: both;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .MacroSelector-container {
+    background-color: #e9ecef;
+    overflow: auto;
+  }
+
+  .macro-selector-info-div {
+    width: 50%;
+    float: left;
+    padding: 0 1em;
+  }
+
+  .macro-selector-hr {
+    margin: 1em 3em;
+  }
+  li {
+    margin: 1em;
+  }
+
+  ul {
+    columns: 2;
+    float: left;
+    justify-content: left;
+    padding: 0;
+    margin-top: -1.5em;
+  }
+  /*Above is left hand side of screen - Below is right hand side */
+
+  .form-container {
+    width: 50%;
+    float: right;
+    padding: 0 1em;
+  }
+  .form-group-container {
+    margin-left: 2em;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .form-group {
+    width: 30%;
+    display: inline-grid;
+    margin-left: 0.5em;
+  }
+  .input-label {
+    display: inline;
+    text-align: left;
+    margin-left: 2.5em;
   }
 
   /* .macro-input {
@@ -146,9 +292,9 @@
     overflow: hidden;
   }
   .btn {
-    margin-left: 37%;
-
-    margin-top: 0.4em;
+    margin-left: 14.5em;
+    width: 20%;
+    margin-top: 0.6em;
     margin-bottom: 1em;
   }
   .total-macro-display {
