@@ -11,7 +11,7 @@ import "./macroSelector.css";
 toast.configure();
 
 const MacroSelector = (props) => {
-  const [macro, setMacro] = useState({ protein: 0, carbs: 0, fat: 0 });
+  const [macro, setMacro] = useState(); //Holds % of each macronutient that user entered
   const [dailyMacroGrams, setDailyMacroGrams] = useState();
   const [dailyCalories, setDailyCalories] = useState();
 

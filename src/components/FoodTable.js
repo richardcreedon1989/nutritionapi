@@ -6,7 +6,7 @@ import { BsTrash } from "react-icons/bs";
 
 const FoodTable = (props) => {
   const { foodItemDetails, sumOfFoodItems } = props;
-  const { fat, protein, carbs, calories } = sumOfFoodItems;
+  const { fat, protein, carbs, calories } = sumOfFoodItems; //destructuring props
 
   // const [windowSize, setWindowSize] = useState();
   // console.log(window.screen.width, "window");
@@ -24,13 +24,12 @@ const FoodTable = (props) => {
   //     setWindowSize(window.screen.width);
   //     window.addEventListener("resize", console.log("resized"));
   //   };
-  // }, [window.screen.width]);
+  // }, [window.screen.width]); //resize wasnt refreshing the screen so not working - windowClassName is workaround but not perfect
 
   const removeRow = (e) => {
     props.removeRow(e);
-    // console.log(windowClassName);
   };
-  // className={windowClassName()}
+
   return (
     <div>
       <Table className={windowClassName()} striped>
